@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050b12">
+    <title>Meteor</title>
+    <link rel="icon" type="image/png" href="/images/profile_picture.png">
+    <style nonce="{{ g.script_nonce }}">
+        :root {
+            color-scheme: dark;
+            --background: #050b12;
+            --surface: #0a1520;
+            --line: #1b3041;
+            --text: #eaf3f9;
+            --muted: #94aabd;
+            --cyan: #74d6ff;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: radial-gradient(ellipse at 50% 5%, #0b2031 0, var(--background) 60%);
+            color: var(--text);
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        button, textarea { font: inherit; }
+        button, a, textarea { -webkit-tap-highlight-color: transparent; }
+        button, a { touch-action: manipulation; }
+        a { color: inherit; text-decoration: none; }
+        button { cursor: pointer; }
+        button:disabled { cursor: wait; opacity: .55; }
+        a:focus-visible, button:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 4px;
+        }
+        .topbar { border-bottom: 1px solid #152533; background: #050b12d9; }
+        .topbar-inner {
+            max-width: 1160px;
+            min-height: 80px;
+            margin: auto;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .brand { display: inline-flex; align-items: center; gap: 11px; }
+        .brand-avatar { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #256183; }
+        .brand-name { font-size: 21px; font-weight: 600; letter-spacing: -.6px; }
+        .version {
+            margin-left: 2px;
+            padding: 1px 7px;
+            border: 1px solid #24394a;
+            border-radius: 5px;
+            color: var(--muted);
+            font-size: 10px;
+            letter-spacing: .5px;
+        }
+        .new-chat {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 14px;
+            border: 1px solid #294151;
+            border-radius: 9px;
+            color: #c7dbe8;
+            font-size: 12px;
+        }
+        .new-chat:hover { border-color: #5795b8; background: #0c1c29; }
+        .new-chat svg { width: 14px; height: 14px; color: var(--cyan); }
+        main { max-width: 1120px; margin: auto; padding: 28px 32px 32px; }
+        .banner {
+            height: clamp(220px, 32vh, 350px);
+            overflow: hidden;
+            border: 1px solid #1b374c;
+            border-radius: 18px;
+            background: #030a12;
+            box-shadow: 0 16px 64px #0005;
+        }
+        .banner img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 80%; }
+        .banner--compact { height: 150px; }
+        .banner--compact img { object-position: center 34%; }
+        .welcome { text-align: center; padding: 29px 0 25px; }
+        .eyebrow { margin: 0 0 8px; color: var(--cyan); font-size: 10px; font-weight: 600; letter-spacing: 2px; }
+        h1 { margin: 0; font-size: clamp(23px, 2.8vw, 32px); line-height: 1.3; font-weight: 500; letter-spacing: -.8px; }
+        .welcome-copy { margin: 9px 0 0; color: var(--muted); font-size: 13px; }
+        .conversation { max-width: 900px; margin: auto; padding: 29px 0 8px; }
+        .chat-message { display: flex; align-items: flex-start; gap: 12px; margin: 0 0 25px; }
+        .message-avatar { width: 33px; height: 33px; border: 1px solid #26536d; border-radius: 50%; flex: 0 0 auto; }
+        .message-main { max-width: calc(100% - 45px); min-width: 0; }
+        .message-heading { display: flex; align-items: center; gap: 12px; margin: 0 0 7px; min-height: 25px; }
+        .message-heading strong { font-size: 12px; font-weight: 600; color: #bed1e0; }
+        .message-content { overflow-wrap: anywhere; line-height: 1.8; }
+        .chat-message--user { justify-content: flex-end; }
+        .chat-message--user .message-main { max-width: 82%; }
+        .chat-message--user .message-heading { justify-content: flex-end; }
+        .chat-message--user .message-content {
+            padding: 12px 17px;
+            background: #10283a;
+            border: 1px solid #203f56;
+            border-radius: 15px 3px 15px 15px;
+            color: #e0eff8;
+        }
+        .edit-button { padding: 2px 7px; background: transparent; border: 0; border-radius: 4px; color: var(--muted); font-size: 11px; }
+        .edit-button:hover { color: var(--cyan); background: #112638; }
+        .composer-wrap { max-width: 900px; margin: auto; }
+        .composer {
+            padding: 17px 20px 13px;
+            border: 1px solid #29485f;
+            border-radius: 17px;
+            background: linear-gradient(120deg, #0e1c29, #0a1520);
+            box-shadow: 0 8px 40px #0003;
+        }
+        .composer:focus-within { border-color: #5b9ebf; box-shadow: 0 0 0 3px #3baeff0a; }
+        .composer-label { display: block; color: #b7cddb; font-size: 12px; }
+        textarea {
+            display: block;
+            width: 100%;
+            min-height: 79px;
+            max-height: 260px;
+            padding: 9px 0;
+            border: 0;
+            border-radius: 3px;
+            resize: vertical;
+            background: transparent;
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        textarea::placeholder { color: #758e9f; }
+        textarea:focus-visible { outline: none; }
+        .composer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 10px; border-top: 1px solid #1d3040; }
+        .keyboard-hint { color: var(--muted); font-size: 11px; }
+        .actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+        .send-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 39px;
+            padding: 8px 17px;
+            border: 1px solid #8be0ff;
+            border-radius: 10px;
+            background: var(--cyan);
+            color: #062033;
+            font-size: 12px;
+            font-weight: 650;
+        }
+        .send-button:hover:not(:disabled) { background: #a0e4ff; }
+        .send-button svg { width: 16px; height: 16px; }
+        .cancel-button { padding: 8px 10px; border: 0; border-radius: 8px; background: transparent; color: #b7cddb; font-size: 12px; }
+        .cancel-button:hover { background: #152c3d; }
+        .edit-notice { margin: 0 0 13px; padding: 11px 15px; border-left: 2px solid var(--cyan); border-radius: 0 7px 7px 0; background: #102536; color: #c3deed; font-size: 12px; }
+        .error { padding: 13px 16px; margin: 0 0 15px; border: 1px solid #744a4e; border-radius: 10px; background: #291b24; color: #f3c7c8; font-size: 13px; }
+        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+        @media (max-width: 640px) {
+            .topbar-inner { min-height: 70px; padding: 13px 18px; gap: 10px; }
+            .brand { gap: 8px; }
+            .brand-avatar { width: 31px; height: 31px; }
+            .brand-name { font-size: 19px; }
+            .version { display: none; }
+            .new-chat { padding: 8px 10px; font-size: 11px; gap: 6px; }
+            main { padding: 20px 16px 24px; }
+            .banner { height: auto; aspect-ratio: 49 / 18; border-radius: 12px; }
+            .banner img { height: auto; }
+            .banner--compact { height: 100px; aspect-ratio: auto; }
+            .banner--compact img { height: 100%; }
+            .welcome { padding: 30px 6px 27px; }
+            .welcome-copy { max-width: 270px; margin: 11px auto 0; line-height: 1.7; }
+            .composer { padding: 15px 15px 12px; border-radius: 14px; }
+            textarea { font-size: 16px; min-height: 105px; }
+            .composer-bottom { flex-wrap: wrap; gap: 13px; }
+            .keyboard-hint { font-size: 10px; }
+            .actions { margin-left: auto; }
+            .chat-message--user .message-main { max-width: 90%; }
+            .conversation { padding-top: 24px; }
+            .message-content { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a class="brand" href="/" aria-label="Meteor, halaman utama">
+                <img class="brand-avatar" src="/images/profile_picture.png" alt="" width="38" height="38">
+                <span class="brand-name">Meteor</span><span class="version">1.0</span>
+            </a>
+            <a class="new-chat" href="/">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3v14M3 10h14"/></svg>
+                Percakapan baru
+            </a>
+        </div>
+    </header>
+    <main>
+    <div class="banner{{ ' banner--compact' if history else '' }}">
+        <img src="/images/banner.png" alt="Meteor 1.0, meteor bercahaya biru melintas di atas Bumi" width="1960" height="720" fetchpriority="high">
+    </div>
+    <form id="chat-form" method="post" action="/" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <input type="hidden" name="history" value="{{ history|tojson|forceescape }}">
+        <input type="hidden" name="history_signature" value="{{ sign_history(history, session.csrf_token) }}">
+        <input type="hidden" name="edit_index" value="{{ edit_index if edit_index is not none else '' }}">
+        {% if not history %}
+        <section class="welcome">
+            <p class="eyebrow">HALO, AKU METEOR</p>
+            <h1>Apa yang ingin kamu jelajahi?</h1>
+            <p class="welcome-copy">Mulai dari pertanyaan kecil, ide besar, atau sekadar cerita.</p>
+        </section>
+        {% else %}
+        <section class="conversation" aria-label="Percakapan">
+            <h1 class="visually-hidden">Percakapan dengan Meteor</h1>
+            {% for item in history %}
+            <article class="chat-message{{ ' chat-message--user' if item.role == 'user' else '' }}">
+                {% if item.role == 'assistant' %}<img class="message-avatar" src="/images/profile_picture.png" alt="" width="33" height="33">{% endif %}
+                <div class="message-main">
+                    <div class="message-heading">
+                        <strong>{{ 'Kamu' if item.role == 'user' else 'Meteor' }}</strong>
+                        {% if item.role == 'user' %}
+                        <button class="edit-button" type="submit" name="edit" value="{{ loop.index0 }}" formnovalidate aria-label="Edit pesan {{ loop.index0 // 2 + 1 }}">Edit</button>
+                        {% endif %}
+                    </div>
+                    <div class="message-content">{% for line in item.content.split('\n') %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+                </div>
+            </article>
+            {% endfor %}
+        </section>
+        {% endif %}
+        <div class="composer-wrap">
+        {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+        {% if edit_index is not none %}
+        <p class="edit-notice">Menyimpan edit akan membuat jawaban baru dan menghapus pesan setelahnya.</p>
+        {% endif %}
+        <div class="composer">
+            <label class="composer-label" for="message">{{ 'Edit pesan' if edit_index is not none else 'Pesan' }}</label>
+            <textarea id="message" name="message" rows="3" cols="30" placeholder="Tulis pesanmu di sini…" aria-describedby="keyboard-hint" required autofocus>{{ message }}</textarea>
+            <div class="composer-bottom">
+                <small class="keyboard-hint" id="keyboard-hint">Enter untuk kirim. Shift+Enter untuk baris baru.</small>
+                <div class="actions">
+                    {% if edit_index is not none %}
+                    <button class="cancel-button" type="submit" name="cancel" value="1" formnovalidate>Batal</button>
+                    {% endif %}
+                    <button class="send-button" id="send" type="submit">
+                        {{ 'Simpan dan kirim ulang' if edit_index is not none else 'Kirim' }}
+                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 16V4m-5 5 5-5 5 5"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+    </main>
+    <script nonce="{{ g.script_nonce }}">
+        const form = document.getElementById("chat-form");
+        const message = document.getElementById("message");
+        const send = document.getElementById("send");
+        let submitting = false;
+
+        const validateMessage = () => {
+            // Match Python str.strip(): includes NEL/control separators, excludes BOM.
+            const whitespace = /[\p{White_Space}\u001c-\u001f]/u;
+            let start = 0, end = message.value.length;
+            while (start < end && whitespace.test(message.value[start])) start++;
+            while (end > start && whitespace.test(message.value[end - 1])) end--;
+            const text = message.value.slice(start, end);
+            message.setCustomValidity([...text].length > 4000 ? "Pesan maksimal 4.000 karakter." : "");
+        };
+        message.addEventListener("input", validateMessage);
+        validateMessage();
+
+        message.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && !event.shiftKey && !event.isComposing && event.keyCode !== 229) {
+                event.preventDefault();
+                if (!submitting) form.requestSubmit(send);
+            }
+        });
+
+        form.addEventListener("submit", (event) => {
+            if (submitting) {
+                event.preventDefault();
+                return;
+            }
+            submitting = true;
+            send.disabled = true;
+            message.readOnly = true;
+        });
+
+        window.addEventListener("pageshow", () => {
+            submitting = false;
+            send.disabled = false;
+            message.readOnly = false;
+        });
+    </script>
+</body>
+</html>

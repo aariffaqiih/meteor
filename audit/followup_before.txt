@@ -1,0 +1,26 @@
+test_malformed_origin_is_a_client_error_without_provider_call (test_hardening.HardeningTests.test_malformed_origin_is_a_client_error_without_provider_call) ... [2026-09-17 13:11:15,734] ERROR in app: Kesalahan internal: ValueError
+FAIL
+test_weak_explicit_signing_secret_is_rejected_without_echoing_it (test_hardening.HardeningTests.test_weak_explicit_signing_secret_is_rejected_without_echoing_it) ... FAIL
+test_launcher_suppresses_access_queries_and_declares_threading (test_hardening.HardeningTests.test_launcher_suppresses_access_queries_and_declares_threading) ... ok
+
+======================================================================
+FAIL: test_malformed_origin_is_a_client_error_without_provider_call (test_hardening.HardeningTests.test_malformed_origin_is_a_client_error_without_provider_call)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 332, in test_malformed_origin_is_a_client_error_without_provider_call
+    self.assertEqual(self.post({"message": "Halo"}, headers={"Origin": origin}).status_code, 403)
+AssertionError: 500 != 403
+
+======================================================================
+FAIL: test_weak_explicit_signing_secret_is_rejected_without_echoing_it (test_hardening.HardeningTests.test_weak_explicit_signing_secret_is_rejected_without_echoing_it)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 337, in test_weak_explicit_signing_secret_is_rejected_without_echoing_it
+    with self.assertRaisesRegex(ValueError, "METEOR_SECRET_KEY") as error:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.062s
+
+FAILED (failures=2)

@@ -1,0 +1,92 @@
+{
+  "source": "baseline",
+  "local": {
+    "GET_empty_page": {
+      "n": 200,
+      "median_ms": 0.2425,
+      "p95_ms": 0.3638
+    },
+    "read_history_12000_chars_20_messages": {
+      "n": 200,
+      "median_ms": 0.7417,
+      "p95_ms": 1.3015
+    },
+    "trim_history_12000_plus_4000": {
+      "n": 200,
+      "median_ms": 0.014,
+      "p95_ms": 0.0142
+    },
+    "identity_filter_8000_chars": {
+      "n": 200,
+      "median_ms": 1.058,
+      "p95_ms": 1.8818
+    },
+    "render_12000_chars_20_messages": {
+      "n": 200,
+      "median_ms": 0.4989,
+      "p95_ms": 0.7743
+    }
+  },
+  "network": {
+    "openrouter": {
+      "samples_ms": {
+        "fresh": [
+          866.88,
+          367.53,
+          378.83
+        ],
+        "pooled": [
+          401.38,
+          68.17,
+          47.79
+        ]
+      },
+      "statuses": {
+        "fresh": [
+          200,
+          200,
+          200
+        ],
+        "pooled": [
+          200,
+          200,
+          200
+        ]
+      },
+      "median_ms": {
+        "fresh": 378.83,
+        "pooled": 68.17
+      }
+    },
+    "groq": {
+      "samples_ms": {
+        "fresh": [
+          682.31,
+          614.77,
+          616.37
+        ],
+        "pooled": [
+          719.68,
+          303.22,
+          306.35
+        ]
+      },
+      "statuses": {
+        "fresh": [
+          200,
+          200,
+          200
+        ],
+        "pooled": [
+          200,
+          200,
+          200
+        ]
+      },
+      "median_ms": {
+        "fresh": 616.37,
+        "pooled": 306.35
+      }
+    }
+  }
+}

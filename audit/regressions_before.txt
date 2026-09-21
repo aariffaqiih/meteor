@@ -1,0 +1,445 @@
+test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) ... 
+  test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='G\u03a1\u03a4') ... FAIL
+  test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='&amp;#71;&amp;#80;&amp;#84;') ... FAIL
+  test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='\\u{47}\\u{50}\\u{54}') ... FAIL
+  test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='SSBhbSB1c2luZyBHUFQtT1NTLTIwQi4=') ... FAIL
+  test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='UjJWdGJXRT0=') ... FAIL
+test_all_cooling_keys_fail_clearly_without_network (test_hardening.HardeningTests.test_all_cooling_keys_fail_clearly_without_network) ... ok
+test_browser_form_round_trip_at_emoji_limits (test_hardening.HardeningTests.test_browser_form_round_trip_at_emoji_limits) ... FAIL
+test_connection_is_reused_without_sharing_cookies_or_authorization (test_hardening.HardeningTests.test_connection_is_reused_without_sharing_cookies_or_authorization) ... FAIL
+test_context_and_request_body_limits (test_hardening.HardeningTests.test_context_and_request_body_limits) ... FAIL
+test_cross_origin_post_does_not_reach_provider (test_hardening.HardeningTests.test_cross_origin_post_does_not_reach_provider) ... FAIL
+test_deep_json_history_returns_400_instead_of_runtime_error (test_hardening.HardeningTests.test_deep_json_history_returns_400_instead_of_runtime_error) ... FAIL
+test_deep_provider_json_falls_back (test_hardening.HardeningTests.test_deep_provider_json_falls_back) ... FAIL
+test_embedded_infinite_error_code_falls_back (test_hardening.HardeningTests.test_embedded_infinite_error_code_falls_back) ... [2026-09-17 13:20:13,626] ERROR in app: Exception on / [POST]
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\.venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\d\faqiih\code\meteor\.venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\d\faqiih\code\meteor\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\d\faqiih\code\meteor\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\d\faqiih\code\meteor\audit\baseline\app.py", line 233, in index
+    answer = ask_ai(pending)
+             ^^^^^^^^^^^^^^^
+  File "D:\d\faqiih\code\meteor\audit\baseline\app.py", line 150, in ask_ai
+    status = int(data["error"].get("code", 502))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OverflowError: cannot convert float infinity to integer
+FAIL
+test_excess_multipart_parts_are_rejected_before_provider_call (test_hardening.HardeningTests.test_excess_multipart_parts_are_rejected_before_provider_call) ... FAIL
+test_fallback_stops_starting_requests_after_elapsed_budget (test_hardening.HardeningTests.test_fallback_stops_starting_requests_after_elapsed_budget) ... [2026-09-17 13:20:13,646] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,646] WARNING in app: API 2 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,646] WARNING in app: API 3 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,646] WARNING in app: API 4 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,646] WARNING in app: API 5 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,646] WARNING in app: API 6 (groq) gagal: HTTP 502
+FAIL
+test_forged_assistant_history_is_rejected (test_hardening.HardeningTests.test_forged_assistant_history_is_rejected) ... FAIL
+test_history_rejects_lone_surrogates_and_oversized_user_messages (test_hardening.HardeningTests.test_history_rejects_lone_surrogates_and_oversized_user_messages) ... 
+  test_history_rejects_lone_surrogates_and_oversized_user_messages (test_hardening.HardeningTests.test_history_rejects_lone_surrogates_and_oversized_user_messages) (content_length=1) ... FAIL
+  test_history_rejects_lone_surrogates_and_oversized_user_messages (test_hardening.HardeningTests.test_history_rejects_lone_surrogates_and_oversized_user_messages) (content_length=4001) ... FAIL
+test_http_and_schema_failure_matrix (test_hardening.HardeningTests.test_http_and_schema_failure_matrix) ... [2026-09-17 13:20:13,681] WARNING in app: API 1 (groq) gagal: HTTP 301
+[2026-09-17 13:20:13,693] WARNING in app: API 1 (groq) gagal: HTTP 400
+[2026-09-17 13:20:13,695] WARNING in app: API 1 (groq) gagal: HTTP 401
+[2026-09-17 13:20:13,700] WARNING in app: API 1 (groq) gagal: HTTP 402
+[2026-09-17 13:20:13,700] WARNING in app: API 1 (groq) gagal: HTTP 403
+[2026-09-17 13:20:13,711] WARNING in app: API 1 (groq) gagal: HTTP 408
+[2026-09-17 13:20:13,713] WARNING in app: API 1 (groq) gagal: HTTP 429
+[2026-09-17 13:20:13,718] WARNING in app: API 1 (groq) gagal: HTTP 500
+[2026-09-17 13:20:13,718] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,723] WARNING in app: API 1 (groq) gagal: HTTP 503
+[2026-09-17 13:20:13,723] WARNING in app: API 1 (groq) gagal: HTTP 504
+[2026-09-17 13:20:13,723] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,733] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,737] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,740] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,740] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,745] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,749] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,749] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,754] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,757] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,757] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,764] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,768] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,771] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:20:13,773] WARNING in app: API 1 (groq) gagal: HTTP 502
+ok
+test_launcher_suppresses_access_queries_and_declares_threading (test_hardening.HardeningTests.test_launcher_suppresses_access_queries_and_declares_threading) ... FAIL
+test_local_request_budget_returns_429_without_more_provider_calls (test_hardening.HardeningTests.test_local_request_budget_returns_429_without_more_provider_calls) ... [2026-09-17 13:20:13,785] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,787] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,789] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,789] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,791] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,794] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,798] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,800] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,803] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,806] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,808] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,811] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,811] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,813] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,814] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,814] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,814] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,820] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,823] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,825] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,825] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+FAIL
+test_malformed_origin_is_a_client_error_without_provider_call (test_hardening.HardeningTests.test_malformed_origin_is_a_client_error_without_provider_call) ... [2026-09-17 13:20:13,830] WARNING in app: API 1 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+WARNING:app:API 1 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+[2026-09-17 13:20:13,830] WARNING in app: API 2 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+WARNING:app:API 2 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+[2026-09-17 13:20:13,833] WARNING in app: API 3 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+WARNING:app:API 3 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+[2026-09-17 13:20:13,833] WARNING in app: API 4 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+WARNING:app:API 4 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+[2026-09-17 13:20:13,833] WARNING in app: API 5 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+WARNING:app:API 5 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+[2026-09-17 13:20:13,833] WARNING in app: API 6 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+WARNING:app:API 6 (groq) gagal: HTTP <MagicMock name='post().status_code' id='1467125487744'>
+FAIL
+test_markup_is_escaped_including_formaction_and_event_handlers (test_hardening.HardeningTests.test_markup_is_escaped_including_formaction_and_event_handlers) ... [2026-09-17 13:20:13,833] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_missing_csrf_and_cross_session_history_are_rejected (test_hardening.HardeningTests.test_missing_csrf_and_cross_session_history_are_rejected) ... [2026-09-17 13:20:13,838] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+FAIL
+test_oversized_answer_cannot_silently_erase_conversation (test_hardening.HardeningTests.test_oversized_answer_cannot_silently_erase_conversation) ... [2026-09-17 13:20:13,840] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ERROR
+test_parallel_requests_do_not_call_a_busy_key_twice (test_hardening.HardeningTests.test_parallel_requests_do_not_call_a_busy_key_twice) ... [2026-09-17 13:20:13,847] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,847] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+FAIL
+test_provider_errors_and_metadata_do_not_leak_to_page_or_app_logs (test_hardening.HardeningTests.test_provider_errors_and_metadata_do_not_leak_to_page_or_app_logs) ... ok
+test_response_size_is_bounded_and_connections_are_closed (test_hardening.HardeningTests.test_response_size_is_bounded_and_connections_are_closed) ... [2026-09-17 13:20:13,855] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+FAIL
+test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) ... 
+  test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) (value='inf') ... FAIL
+  test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) (value='1e309') ... FAIL
+  test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) (value='1e100') ... FAIL
+  test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) (value='Fri, 31 Dec 9999 23:59:59 GMT') ... FAIL
+test_retry_defaults_and_elapsed_cooldown_recovery (test_hardening.HardeningTests.test_retry_defaults_and_elapsed_cooldown_recovery) ... [2026-09-17 13:20:13,855] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_role_schema_empty_edit_and_unicode_boundaries (test_hardening.HardeningTests.test_role_schema_empty_edit_and_unicode_boundaries) ... [2026-09-17 13:20:13,873] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,884] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,888] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:20:13,890] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_unexpected_exception_does_not_expose_message_or_traceback (test_hardening.HardeningTests.test_unexpected_exception_does_not_expose_message_or_traceback) ... FAIL
+test_untrusted_host_is_rejected (test_hardening.HardeningTests.test_untrusted_host_is_rejected) ... FAIL
+test_weak_explicit_signing_secret_is_rejected_without_echoing_it (test_hardening.HardeningTests.test_weak_explicit_signing_secret_is_rejected_without_echoing_it) ... FAIL
+
+======================================================================
+ERROR: test_oversized_answer_cannot_silently_erase_conversation (test_hardening.HardeningTests.test_oversized_answer_cannot_silently_erase_conversation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 113, in test_oversized_answer_cannot_silently_erase_conversation
+    self.assertEqual(history[-1]["content"], "Jawaban normal")
+                     ~~~~~~~^^^^
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='G\u03a1\u03a4')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 202, in test_additional_encoding_and_greek_homoglyph_bypasses
+    self.assertEqual(meteor.protect_identity(answer), meteor.IDENTITY_REPLY)
+AssertionError: 'G\u03a1\u03a4' != 'Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.'
+- G\u03a1\u03a4
++ Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.
+
+
+======================================================================
+FAIL: test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='&amp;#71;&amp;#80;&amp;#84;')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 202, in test_additional_encoding_and_greek_homoglyph_bypasses
+    self.assertEqual(meteor.protect_identity(answer), meteor.IDENTITY_REPLY)
+AssertionError: '&amp;#71;&amp;#80;&amp;#84;' != 'Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.'
+- &amp;#71;&amp;#80;&amp;#84;
++ Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.
+
+
+======================================================================
+FAIL: test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='\\u{47}\\u{50}\\u{54}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 202, in test_additional_encoding_and_greek_homoglyph_bypasses
+    self.assertEqual(meteor.protect_identity(answer), meteor.IDENTITY_REPLY)
+AssertionError: '\\u{47}\\u{50}\\u{54}' != 'Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.'
+- \u{47}\u{50}\u{54}
++ Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.
+
+
+======================================================================
+FAIL: test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='SSBhbSB1c2luZyBHUFQtT1NTLTIwQi4=')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 202, in test_additional_encoding_and_greek_homoglyph_bypasses
+    self.assertEqual(meteor.protect_identity(answer), meteor.IDENTITY_REPLY)
+AssertionError: 'SSBhbSB1c2luZyBHUFQtT1NTLTIwQi4=' != 'Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.'
+- SSBhbSB1c2luZyBHUFQtT1NTLTIwQi4=
++ Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.
+
+
+======================================================================
+FAIL: test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) (answer='UjJWdGJXRT0=')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 202, in test_additional_encoding_and_greek_homoglyph_bypasses
+    self.assertEqual(meteor.protect_identity(answer), meteor.IDENTITY_REPLY)
+AssertionError: 'UjJWdGJXRT0=' != 'Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.'
+- UjJWdGJXRT0=
++ Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.
+
+
+======================================================================
+FAIL: test_browser_form_round_trip_at_emoji_limits (test_hardening.HardeningTests.test_browser_form_round_trip_at_emoji_limits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 104, in test_browser_form_round_trip_at_emoji_limits
+    self.assertEqual(second.status_code, 200)
+AssertionError: 413 != 200
+
+======================================================================
+FAIL: test_connection_is_reused_without_sharing_cookies_or_authorization (test_hardening.HardeningTests.test_connection_is_reused_without_sharing_cookies_or_authorization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 231, in test_connection_is_reused_without_sharing_cookies_or_authorization
+    self.assertEqual(len(set(row[0] for row in observed)), 1)
+AssertionError: 2 != 1
+
+======================================================================
+FAIL: test_context_and_request_body_limits (test_hardening.HardeningTests.test_context_and_request_body_limits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 322, in test_context_and_request_body_limits
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cross_origin_post_does_not_reach_provider (test_hardening.HardeningTests.test_cross_origin_post_does_not_reach_provider)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 90, in test_cross_origin_post_does_not_reach_provider
+    self.assertEqual(result.status_code, 403)
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_deep_json_history_returns_400_instead_of_runtime_error (test_hardening.HardeningTests.test_deep_json_history_returns_400_instead_of_runtime_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 67, in test_deep_json_history_returns_400_instead_of_runtime_error
+    self.assertEqual(result.status_code, 400)
+AssertionError: 503 != 400
+
+======================================================================
+FAIL: test_deep_provider_json_falls_back (test_hardening.HardeningTests.test_deep_provider_json_falls_back)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 133, in test_deep_provider_json_falls_back
+    self.assertEqual(self.post({"message": "Halo"}).status_code, 200)
+AssertionError: 503 != 200
+
+======================================================================
+FAIL: test_embedded_infinite_error_code_falls_back (test_hardening.HardeningTests.test_embedded_infinite_error_code_falls_back)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 126, in test_embedded_infinite_error_code_falls_back
+    self.assertEqual(result.status_code, 200)
+AssertionError: 500 != 200
+
+======================================================================
+FAIL: test_excess_multipart_parts_are_rejected_before_provider_call (test_hardening.HardeningTests.test_excess_multipart_parts_are_rejected_before_provider_call)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 340, in test_excess_multipart_parts_are_rejected_before_provider_call
+    self.assertEqual(result.status_code, 413)
+AssertionError: 200 != 413
+
+======================================================================
+FAIL: test_fallback_stops_starting_requests_after_elapsed_budget (test_hardening.HardeningTests.test_fallback_stops_starting_requests_after_elapsed_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 195, in test_fallback_stops_starting_requests_after_elapsed_budget
+    self.assertLessEqual(post.call_count, 3)
+AssertionError: 6 not less than or equal to 3
+
+======================================================================
+FAIL: test_forged_assistant_history_is_rejected (test_hardening.HardeningTests.test_forged_assistant_history_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 84, in test_forged_assistant_history_is_rejected
+    self.assertEqual(result.status_code, 400)
+AssertionError: 200 != 400
+
+======================================================================
+FAIL: test_history_rejects_lone_surrogates_and_oversized_user_messages (test_hardening.HardeningTests.test_history_rejects_lone_surrogates_and_oversized_user_messages) (content_length=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 72, in test_history_rejects_lone_surrogates_and_oversized_user_messages
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_history_rejects_lone_surrogates_and_oversized_user_messages (test_hardening.HardeningTests.test_history_rejects_lone_surrogates_and_oversized_user_messages) (content_length=4001)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 72, in test_history_rejects_lone_surrogates_and_oversized_user_messages
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_launcher_suppresses_access_queries_and_declares_threading (test_hardening.HardeningTests.test_launcher_suppresses_access_queries_and_declares_threading)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 356, in test_launcher_suppresses_access_queries_and_declares_threading
+    self.assertEqual(logger.level, logging.ERROR)
+AssertionError: 20 != 40
+
+======================================================================
+FAIL: test_local_request_budget_returns_429_without_more_provider_calls (test_hardening.HardeningTests.test_local_request_budget_returns_429_without_more_provider_calls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 183, in test_local_request_budget_returns_429_without_more_provider_calls
+    self.assertEqual(results[-1].status_code, 429)
+AssertionError: 200 != 429
+
+======================================================================
+FAIL: test_malformed_origin_is_a_client_error_without_provider_call (test_hardening.HardeningTests.test_malformed_origin_is_a_client_error_without_provider_call)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 332, in test_malformed_origin_is_a_client_error_without_provider_call
+    self.assertEqual(self.post({"message": "Halo"}, headers={"Origin": origin}).status_code, 403)
+AssertionError: 503 != 403
+
+======================================================================
+FAIL: test_missing_csrf_and_cross_session_history_are_rejected (test_hardening.HardeningTests.test_missing_csrf_and_cross_session_history_are_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 266, in test_missing_csrf_and_cross_session_history_are_rejected
+    self.assertEqual(self.client.post("/", data={"message": "Halo"}).status_code, 403)
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_parallel_requests_do_not_call_a_busy_key_twice (test_hardening.HardeningTests.test_parallel_requests_do_not_call_a_busy_key_twice)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 176, in test_parallel_requests_do_not_call_a_busy_key_twice
+    self.assertEqual(post.call_count, 1)
+AssertionError: 2 != 1
+
+======================================================================
+FAIL: test_response_size_is_bounded_and_connections_are_closed (test_hardening.HardeningTests.test_response_size_is_bounded_and_connections_are_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 151, in test_response_size_is_bounded_and_connections_are_closed
+    self.assertEqual(history[-1]["content"], "Jawaban normal")
+AssertionError: 'oversized body accepted' != 'Jawaban normal'
+- oversized body accepted
++ Jawaban normal
+
+
+======================================================================
+FAIL: test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) (value='inf')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 119, in test_retry_after_is_finite_and_bounded
+    self.assertTrue(math.isfinite(delay))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) (value='1e309')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 119, in test_retry_after_is_finite_and_bounded
+    self.assertTrue(math.isfinite(delay))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) (value='1e100')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 121, in test_retry_after_is_finite_and_bounded
+    self.assertLessEqual(delay, 86400)
+AssertionError: 1e+100 not less than or equal to 86400
+
+======================================================================
+FAIL: test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) (value='Fri, 31 Dec 9999 23:59:59 GMT')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 121, in test_retry_after_is_finite_and_bounded
+    self.assertLessEqual(delay, 86400)
+AssertionError: 251612674785.1445 not less than or equal to 86400
+
+======================================================================
+FAIL: test_unexpected_exception_does_not_expose_message_or_traceback (test_hardening.HardeningTests.test_unexpected_exception_does_not_expose_message_or_traceback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 140, in test_unexpected_exception_does_not_expose_message_or_traceback
+    self.assertNotIn(secret, result.get_data(as_text=True))
+AssertionError: 'SENSITIVE_KEY_AND_PROMPT_SENTINEL' unexpectedly found in '<!doctype html>\n<html lang="id">\n<head>\n    <meta charset="utf-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1">\n    <title>Meteor</title>\n</head>\n<body>\n    <h1>Meteor</h1>\n\n    <form id="chat-form" method="post" action="/">\n        <input type="hidden" name="history" value="[]">\n        <input type="hidden" name="edit_index" value="">\n    \n\n    <p role="alert">SENSITIVE_KEY_AND_PROMPT_SENTINEL</p>\n\n        \n        <label for="message">Pesan</label><br>\n        <textarea id="message" name="message" rows="4" cols="30" maxlength="4000" required autofocus>Halo</textarea><br>\n        <small>Enter untuk kirim. Shift+Enter untuk baris baru.</small><br>\n        <button id="send" type="submit">Kirim</button>\n        \n        <a href="/">Percakapan baru</a>\n    </form>\n    <script nonce="N4IPci4G5a3rjBiGQjG07w">\n        const form = document.getElementById("chat-form");\n        const message = document.getElementById("message");\n        const send = document.getElementById("send");\n        let submitting = false;\n\n        message.addEventListener("keydown", (event) => {\n            if (event.key === "Enter" && !event.shiftKey && !event.isComposing && event.keyCode !== 229) {\n                event.preventDefault();\n                if (!submitting) form.requestSubmit(send);\n            }\n        });\n\n        form.addEventListener("submit", (event) => {\n            if (submitting) {\n                event.preventDefault();\n                return;\n            }\n            submitting = true;\n            send.disabled = true;\n            message.readOnly = true;\n        });\n\n        window.addEventListener("pageshow", () => {\n            submitting = false;\n            send.disabled = false;\n            message.readOnly = false;\n        });\n    </script>\n</body>\n</html>'
+
+======================================================================
+FAIL: test_untrusted_host_is_rejected (test_hardening.HardeningTests.test_untrusted_host_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 94, in test_untrusted_host_is_rejected
+    self.assertEqual(self.client.get("/", headers={"Host": "evil.example"}).status_code, 400)
+AssertionError: 200 != 400
+
+======================================================================
+FAIL: test_weak_explicit_signing_secret_is_rejected_without_echoing_it (test_hardening.HardeningTests.test_weak_explicit_signing_secret_is_rejected_without_echoing_it)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\d\faqiih\code\meteor\test_hardening.py", line 345, in test_weak_explicit_signing_secret_is_rejected_without_echoing_it
+    with self.assertRaisesRegex(ValueError, "METEOR_SECRET_KEY") as error:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.929s
+
+FAILED (failures=30, errors=1)

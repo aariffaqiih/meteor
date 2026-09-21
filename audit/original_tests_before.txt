@@ -1,0 +1,55 @@
+test_bad_provider_responses_and_embedded_errors_fall_back (baseline_tests.ChatTests.test_bad_provider_responses_and_embedded_errors_fall_back) ... [2026-09-17 13:16:16,187] WARNING in app: API 1 (openrouter) gagal: HTTP 502
+[2026-09-17 13:16:16,187] WARNING in app: API 2 (groq) gagal: HTTP 429
+[2026-09-17 13:16:16,187] WARNING in app: API 3 (openrouter) gagal: HTTP 502
+[2026-09-17 13:16:16,187] WARNING in app: API 4 (groq) gagal: HTTP 502
+ok
+test_edit_and_cancel_preserve_history_without_using_api (baseline_tests.ChatTests.test_edit_and_cancel_preserve_history_without_using_api) ... ok
+test_edit_regenerates_from_that_turn_and_discards_later_turns (baseline_tests.ChatTests.test_edit_regenerates_from_that_turn_and_discards_later_turns) ... ok
+test_failed_edit_keeps_original_history_and_draft (baseline_tests.ChatTests.test_failed_edit_keeps_original_history_and_draft) ... [2026-09-17 13:16:16,204] WARNING in app: API 1 (openrouter) gagal: HTTP 503
+[2026-09-17 13:16:16,204] WARNING in app: API 2 (groq) gagal: HTTP 503
+[2026-09-17 13:16:16,204] WARNING in app: API 3 (openrouter) gagal: HTTP 503
+[2026-09-17 13:16:16,204] WARNING in app: API 4 (groq) gagal: HTTP 503
+[2026-09-17 13:16:16,204] WARNING in app: API 5 (openrouter) gagal: HTTP 503
+[2026-09-17 13:16:16,204] WARNING in app: API 6 (groq) gagal: HTTP 503
+ok
+test_failure_keeps_user_message_and_previous_history (baseline_tests.ChatTests.test_failure_keeps_user_message_and_previous_history) ... [2026-09-17 13:16:16,212] WARNING in app: API 1 (openrouter) gagal: HTTP 503
+[2026-09-17 13:16:16,212] WARNING in app: API 2 (groq) gagal: HTTP 503
+[2026-09-17 13:16:16,212] WARNING in app: API 3 (openrouter) gagal: HTTP 503
+[2026-09-17 13:16:16,212] WARNING in app: API 4 (groq) gagal: HTTP 503
+[2026-09-17 13:16:16,212] WARNING in app: API 5 (openrouter) gagal: HTTP 503
+[2026-09-17 13:16:16,212] WARNING in app: API 6 (groq) gagal: HTTP 503
+ok
+test_groq_requires_free_plan_confirmation (baseline_tests.ChatTests.test_groq_requires_free_plan_confirmation) ... ok
+test_html_round_trip_preserves_context_and_escapes_content (baseline_tests.ChatTests.test_html_round_trip_preserves_context_and_escapes_content) ... ok
+test_identity_filter_blocks_names_and_common_obfuscations (baseline_tests.ChatTests.test_identity_filter_blocks_names_and_common_obfuscations) ... ok
+test_inline_script_nonce_matches_csp_and_changes_per_request (baseline_tests.ChatTests.test_inline_script_nonce_matches_csp_and_changes_per_request) ... ok
+test_invalid_edit_index_cannot_change_assistant_or_call_api (baseline_tests.ChatTests.test_invalid_edit_index_cannot_change_assistant_or_call_api) ... ok
+test_invalid_inputs_do_not_call_provider (baseline_tests.ChatTests.test_invalid_inputs_do_not_call_provider) ... ok
+test_legitimate_explanation_of_safety_label_is_not_filtered (baseline_tests.ChatTests.test_legitimate_explanation_of_safety_label_is_not_filtered) ... ok
+test_long_history_keeps_complete_recent_turns (baseline_tests.ChatTests.test_long_history_keeps_complete_recent_turns) ... ok
+test_missing_keys_returns_useful_error (baseline_tests.ChatTests.test_missing_keys_returns_useful_error) ... ok
+test_moderation_model_response_is_rejected_and_falls_back (baseline_tests.ChatTests.test_moderation_model_response_is_rejected_and_falls_back) ... [2026-09-17 13:16:16,229] WARNING in app: API 1 (openrouter) gagal: HTTP 502
+ok
+test_no_credentials_served (baseline_tests.ChatTests.test_no_credentials_served) ... ok
+test_pinned_model_accepts_canonical_response_name (baseline_tests.ChatTests.test_pinned_model_accepts_canonical_response_name) ... ok
+test_provider_identity_leak_is_replaced_before_render_and_history (baseline_tests.ChatTests.test_provider_identity_leak_is_replaced_before_render_and_history) ... ok
+test_rate_limited_keys_are_not_retried_during_cooldown (baseline_tests.ChatTests.test_rate_limited_keys_are_not_retried_during_cooldown) ... [1970-01-01 07:16:40,000] WARNING in app: API 1 (openrouter) gagal: HTTP 429
+[1970-01-01 07:16:40,000] WARNING in app: API 2 (groq) gagal: HTTP 429
+[1970-01-01 07:16:40,000] WARNING in app: API 3 (openrouter) gagal: HTTP 429
+[1970-01-01 07:16:40,000] WARNING in app: API 4 (groq) gagal: HTTP 429
+[1970-01-01 07:16:40,000] WARNING in app: API 5 (openrouter) gagal: HTTP 429
+[1970-01-01 07:16:40,000] WARNING in app: API 6 (groq) gagal: HTTP 429
+ok
+test_retry_after_http_date (baseline_tests.ChatTests.test_retry_after_http_date) ... ok
+test_untrusted_assistant_history_is_filtered_on_edit_and_inference (baseline_tests.ChatTests.test_untrusted_assistant_history_is_filtered_on_edit_and_inference) ... ok
+test_uses_free_models_and_falls_back_through_all_six_keys (baseline_tests.ChatTests.test_uses_free_models_and_falls_back_through_all_six_keys) ... [2026-09-17 13:16:16,237] WARNING in app: API 1 (openrouter) gagal: HTTP 429
+[2026-09-17 13:16:16,237] WARNING in app: API 2 (groq) gagal: HTTP 401
+[2026-09-17 13:16:16,237] WARNING in app: API 3 (openrouter) gagal: HTTP 402
+[2026-09-17 13:16:16,237] WARNING in app: API 4 (groq) gagal: HTTP 503
+[2026-09-17 13:16:16,237] WARNING in app: API 5 (openrouter) gagal: HTTP 502
+ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.061s
+
+OK

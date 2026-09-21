@@ -1,0 +1,194 @@
+test_bad_provider_responses_and_embedded_errors_fall_back (test_app.ChatTests.test_bad_provider_responses_and_embedded_errors_fall_back) ... [2026-09-17 13:46:13,827] WARNING in app: API 1 (openrouter) gagal: HTTP 502
+[2026-09-17 13:46:13,827] WARNING in app: API 2 (groq) gagal: HTTP 429
+[2026-09-17 13:46:13,827] WARNING in app: API 3 (openrouter) gagal: HTTP 502
+[2026-09-17 13:46:13,827] WARNING in app: API 4 (groq) gagal: HTTP 502
+ok
+test_edit_and_cancel_preserve_history_without_using_api (test_app.ChatTests.test_edit_and_cancel_preserve_history_without_using_api) ... FAIL
+test_edit_regenerates_from_that_turn_and_discards_later_turns (test_app.ChatTests.test_edit_regenerates_from_that_turn_and_discards_later_turns) ... ok
+test_failed_edit_keeps_original_history_and_draft (test_app.ChatTests.test_failed_edit_keeps_original_history_and_draft) ... [2026-09-17 13:46:13,868] WARNING in app: API 1 (openrouter) gagal: HTTP 503
+[2026-09-17 13:46:13,868] WARNING in app: API 2 (groq) gagal: HTTP 503
+[2026-09-17 13:46:13,868] WARNING in app: API 3 (openrouter) gagal: HTTP 503
+[2026-09-17 13:46:13,868] WARNING in app: API 4 (groq) gagal: HTTP 503
+[2026-09-17 13:46:13,868] WARNING in app: API 5 (openrouter) gagal: HTTP 503
+[2026-09-17 13:46:13,868] WARNING in app: API 6 (groq) gagal: HTTP 503
+ok
+test_failure_keeps_user_message_and_previous_history (test_app.ChatTests.test_failure_keeps_user_message_and_previous_history) ... [2026-09-17 13:46:13,876] WARNING in app: API 1 (openrouter) gagal: HTTP 503
+[2026-09-17 13:46:13,876] WARNING in app: API 2 (groq) gagal: HTTP 503
+[2026-09-17 13:46:13,876] WARNING in app: API 3 (openrouter) gagal: HTTP 503
+[2026-09-17 13:46:13,876] WARNING in app: API 4 (groq) gagal: HTTP 503
+[2026-09-17 13:46:13,876] WARNING in app: API 5 (openrouter) gagal: HTTP 503
+[2026-09-17 13:46:13,876] WARNING in app: API 6 (groq) gagal: HTTP 503
+ok
+test_groq_requires_free_plan_confirmation (test_app.ChatTests.test_groq_requires_free_plan_confirmation) ... ok
+test_html_round_trip_preserves_context_and_escapes_content (test_app.ChatTests.test_html_round_trip_preserves_context_and_escapes_content) ... ok
+test_identity_filter_blocks_names_and_common_obfuscations (test_app.ChatTests.test_identity_filter_blocks_names_and_common_obfuscations) ... ok
+test_inline_script_nonce_matches_csp_and_changes_per_request (test_app.ChatTests.test_inline_script_nonce_matches_csp_and_changes_per_request) ... ok
+test_invalid_edit_index_cannot_change_assistant_or_call_api (test_app.ChatTests.test_invalid_edit_index_cannot_change_assistant_or_call_api) ... ok
+test_invalid_inputs_do_not_call_provider (test_app.ChatTests.test_invalid_inputs_do_not_call_provider) ... ok
+test_legitimate_explanation_of_safety_label_is_not_filtered (test_app.ChatTests.test_legitimate_explanation_of_safety_label_is_not_filtered) ... ok
+test_long_history_keeps_complete_recent_turns (test_app.ChatTests.test_long_history_keeps_complete_recent_turns) ... ok
+test_missing_keys_returns_useful_error (test_app.ChatTests.test_missing_keys_returns_useful_error) ... ok
+test_moderation_model_response_is_rejected_and_falls_back (test_app.ChatTests.test_moderation_model_response_is_rejected_and_falls_back) ... [2026-09-17 13:46:13,932] WARNING in app: API 1 (openrouter) gagal: HTTP 502
+ok
+test_no_credentials_served (test_app.ChatTests.test_no_credentials_served) ... ok
+test_pinned_model_accepts_canonical_response_name (test_app.ChatTests.test_pinned_model_accepts_canonical_response_name) ... ok
+test_provider_identity_leak_is_replaced_before_render_and_history (test_app.ChatTests.test_provider_identity_leak_is_replaced_before_render_and_history) ... ok
+test_rate_limited_keys_are_not_retried_during_cooldown (test_app.ChatTests.test_rate_limited_keys_are_not_retried_during_cooldown) ... [2026-09-17 13:46:13,954] WARNING in app: API 1 (openrouter) gagal: HTTP 429
+[2026-09-17 13:46:13,954] WARNING in app: API 2 (groq) gagal: HTTP 429
+[2026-09-17 13:46:13,954] WARNING in app: API 3 (openrouter) gagal: HTTP 429
+[2026-09-17 13:46:13,954] WARNING in app: API 4 (groq) gagal: HTTP 429
+[2026-09-17 13:46:13,954] WARNING in app: API 5 (openrouter) gagal: HTTP 429
+[2026-09-17 13:46:13,956] WARNING in app: API 6 (groq) gagal: HTTP 429
+ok
+test_retry_after_http_date (test_app.ChatTests.test_retry_after_http_date) ... ok
+test_untrusted_assistant_history_is_filtered_on_edit_and_inference (test_app.ChatTests.test_untrusted_assistant_history_is_filtered_on_edit_and_inference) ... ok
+test_uses_free_models_and_falls_back_through_all_six_keys (test_app.ChatTests.test_uses_free_models_and_falls_back_through_all_six_keys) ... [2026-09-17 13:46:13,964] WARNING in app: API 1 (openrouter) gagal: HTTP 429
+[2026-09-17 13:46:13,968] WARNING in app: API 2 (groq) gagal: HTTP 401
+[2026-09-17 13:46:13,968] WARNING in app: API 3 (openrouter) gagal: HTTP 402
+[2026-09-17 13:46:13,968] WARNING in app: API 4 (groq) gagal: HTTP 503
+[2026-09-17 13:46:13,968] WARNING in app: API 5 (openrouter) gagal: HTTP 502
+ok
+test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) ... ok
+test_all_cooling_keys_fail_clearly_without_network (test_hardening.HardeningTests.test_all_cooling_keys_fail_clearly_without_network) ... ok
+test_browser_form_round_trip_at_emoji_limits (test_hardening.HardeningTests.test_browser_form_round_trip_at_emoji_limits) ... ok
+test_connection_is_reused_without_sharing_cookies_or_authorization (test_hardening.HardeningTests.test_connection_is_reused_without_sharing_cookies_or_authorization) ... ok
+test_context_and_request_body_limits (test_hardening.HardeningTests.test_context_and_request_body_limits) ... ok
+test_cross_origin_post_does_not_reach_provider (test_hardening.HardeningTests.test_cross_origin_post_does_not_reach_provider) ... ok
+test_deep_json_history_returns_400_instead_of_runtime_error (test_hardening.HardeningTests.test_deep_json_history_returns_400_instead_of_runtime_error) ... ok
+test_deep_provider_json_falls_back (test_hardening.HardeningTests.test_deep_provider_json_falls_back) ... [2026-09-17 13:46:14,547] WARNING in app: API 1 (groq) gagal: HTTP 502
+ok
+test_embedded_infinite_error_code_falls_back (test_hardening.HardeningTests.test_embedded_infinite_error_code_falls_back) ... [2026-09-17 13:46:14,551] WARNING in app: API 1 (groq) gagal: HTTP 502
+ok
+test_excess_multipart_parts_are_rejected_before_provider_call (test_hardening.HardeningTests.test_excess_multipart_parts_are_rejected_before_provider_call) ... ok
+test_fallback_stops_starting_requests_after_elapsed_budget (test_hardening.HardeningTests.test_fallback_stops_starting_requests_after_elapsed_budget) ... [2026-09-17 13:46:14,558] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,558] WARNING in app: API 2 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,558] WARNING in app: API 3 (groq) gagal: HTTP 502
+ok
+test_forged_assistant_history_is_rejected (test_hardening.HardeningTests.test_forged_assistant_history_is_rejected) ... ok
+test_history_rejects_lone_surrogates_and_oversized_user_messages (test_hardening.HardeningTests.test_history_rejects_lone_surrogates_and_oversized_user_messages) ... ok
+test_http_and_schema_failure_matrix (test_hardening.HardeningTests.test_http_and_schema_failure_matrix) ... [2026-09-17 13:46:14,570] WARNING in app: API 1 (groq) gagal: HTTP 301
+[2026-09-17 13:46:14,581] WARNING in app: API 1 (groq) gagal: HTTP 400
+[2026-09-17 13:46:14,585] WARNING in app: API 1 (groq) gagal: HTTP 401
+[2026-09-17 13:46:14,588] WARNING in app: API 1 (groq) gagal: HTTP 402
+[2026-09-17 13:46:14,594] WARNING in app: API 1 (groq) gagal: HTTP 403
+[2026-09-17 13:46:14,598] WARNING in app: API 1 (groq) gagal: HTTP 408
+[2026-09-17 13:46:14,602] WARNING in app: API 1 (groq) gagal: HTTP 429
+[2026-09-17 13:46:14,605] WARNING in app: API 1 (groq) gagal: HTTP 500
+[2026-09-17 13:46:14,607] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,610] WARNING in app: API 1 (groq) gagal: HTTP 503
+[2026-09-17 13:46:14,615] WARNING in app: API 1 (groq) gagal: HTTP 504
+[2026-09-17 13:46:14,619] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,622] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,628] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,630] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,632] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,637] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,639] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,643] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,648] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,650] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,655] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,659] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,663] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,665] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,669] WARNING in app: API 1 (groq) gagal: HTTP 502
+ok
+test_launcher_suppresses_access_queries_and_declares_threading (test_hardening.HardeningTests.test_launcher_suppresses_access_queries_and_declares_threading) ... ok
+test_local_request_budget_returns_429_without_more_provider_calls (test_hardening.HardeningTests.test_local_request_budget_returns_429_without_more_provider_calls) ... [2026-09-17 13:46:14,683] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,688] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,693] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,693] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,698] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,698] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,704] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,707] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,710] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,710] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,716] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,716] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,723] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,725] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,727] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,731] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,734] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,734] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,734] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,734] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_malformed_origin_is_a_client_error_without_provider_call (test_hardening.HardeningTests.test_malformed_origin_is_a_client_error_without_provider_call) ... ok
+test_markup_is_escaped_including_formaction_and_event_handlers (test_hardening.HardeningTests.test_markup_is_escaped_including_formaction_and_event_handlers) ... [2026-09-17 13:46:14,763] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_missing_csrf_and_cross_session_history_are_rejected (test_hardening.HardeningTests.test_missing_csrf_and_cross_session_history_are_rejected) ... [2026-09-17 13:46:14,763] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_oversized_answer_cannot_silently_erase_conversation (test_hardening.HardeningTests.test_oversized_answer_cannot_silently_erase_conversation) ... [2026-09-17 13:46:14,776] WARNING in app: API 1 (groq) gagal: HTTP 502
+WARNING:app:API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,779] INFO in app: API 2 (groq): model openai/gpt-oss-20b
+INFO:app:API 2 (groq): model openai/gpt-oss-20b
+ok
+test_parallel_requests_do_not_call_a_busy_key_twice (test_hardening.HardeningTests.test_parallel_requests_do_not_call_a_busy_key_twice) ... [2026-09-17 13:46:14,779] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_provider_errors_and_metadata_do_not_leak_to_page_or_app_logs (test_hardening.HardeningTests.test_provider_errors_and_metadata_do_not_leak_to_page_or_app_logs) ... ok
+test_response_size_is_bounded_and_connections_are_closed (test_hardening.HardeningTests.test_response_size_is_bounded_and_connections_are_closed) ... [2026-09-17 13:46:14,795] WARNING in app: API 1 (groq) gagal: HTTP 502
+WARNING:app:API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:46:14,795] INFO in app: API 2 (groq): model openai/gpt-oss-20b
+INFO:app:API 2 (groq): model openai/gpt-oss-20b
+ok
+test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) ... ok
+test_retry_defaults_and_elapsed_cooldown_recovery (test_hardening.HardeningTests.test_retry_defaults_and_elapsed_cooldown_recovery) ... [2026-09-17 13:46:14,795] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_role_schema_empty_edit_and_unicode_boundaries (test_hardening.HardeningTests.test_role_schema_empty_edit_and_unicode_boundaries) ... [2026-09-17 13:46:14,828] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,830] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,839] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,839] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:46:14,847] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_unexpected_exception_does_not_expose_message_or_traceback (test_hardening.HardeningTests.test_unexpected_exception_does_not_expose_message_or_traceback) ... ok
+test_untrusted_host_is_rejected (test_hardening.HardeningTests.test_untrusted_host_is_rejected) ... ok
+test_weak_explicit_signing_secret_is_rejected_without_echoing_it (test_hardening.HardeningTests.test_weak_explicit_signing_secret_is_rejected_without_echoing_it) ... ok
+test_brand_images_are_served_as_png_without_exposing_other_files (test_ui.ThemeTests.test_brand_images_are_served_as_png_without_exposing_other_files) ... ok
+test_theme_requires_fresh_nonce_and_uses_only_local_images (test_ui.ThemeTests.test_theme_requires_fresh_nonce_and_uses_only_local_images) ... ok
+
+======================================================================
+FAIL: test_edit_and_cancel_preserve_history_without_using_api (test_app.ChatTests.test_edit_and_cancel_preserve_history_without_using_api)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\aarif\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py", line 1396, in patched
+    return func(*newargs, **newkeywargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\d\faqiih\code\meteor\test_app.py", line 214, in test_edit_and_cancel_preserve_history_without_using_api
+    self.assertIn(expected, page)
+AssertionError: '>Kirim</button>' not found in '<!doctype html>\n<html lang="id">\n<head>\n    <meta charset="utf-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1">\n    <meta name="theme-color" content="#050b12">\n    <title>Meteor</title>\n    <link rel="icon" type="image/png" href="/images/profile_picture.png">\n    <style nonce="jpDHKlc5nZveQLf8vURfcg">\n        :root {\n            color-scheme: dark;\n            --background: #050b12;\n            --surface: #0a1520;\n            --line: #1b3041;\n            --text: #eaf3f9;\n            --muted: #94aabd;\n            --cyan: #74d6ff;\n        }\n        * { box-sizing: border-box; }\n        body {\n            margin: 0;\n            background: radial-gradient(ellipse at 50% 5%, #0b2031 0, var(--background) 60%);\n            color: var(--text);\n            font-family: "Segoe UI", Arial, sans-serif;\n            font-size: 15px;\n            line-height: 1.6;\n            min-height: 100vh;\n        }\n        button, textarea { font: inherit; }\n        button, a, textarea { -webkit-tap-highlight-color: transparent; }\n        button, a { touch-action: manipulation; }\n        a { color: inherit; text-decoration: none; }\n        button { cursor: pointer; }\n        button:disabled { cursor: wait; opacity: .55; }\n        a:focus-visible, button:focus-visible, textarea:focus-visible {\n            outline: 2px solid var(--cyan);\n            outline-offset: 4px;\n        }\n        .topbar { border-bottom: 1px solid #152533; background: #050b12d9; }\n        .topbar-inner {\n            max-width: 1160px;\n            min-height: 80px;\n            margin: auto;\n            padding: 16px 32px;\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            gap: 20px;\n        }\n        .brand { display: inline-flex; align-items: center; gap: 11px; }\n        .brand-avatar { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #256183; }\n        .brand-name { font-size: 21px; font-weight: 600; letter-spacing: -.6px; }\n        .version {\n            margin-left: 2px;\n            padding: 1px 7px;\n            border: 1px solid #24394a;\n            border-radius: 5px;\n            color: var(--muted);\n            font-size: 10px;\n            letter-spacing: .5px;\n        }\n        .new-chat {\n            display: inline-flex;\n            align-items: center;\n            gap: 9px;\n            padding: 9px 14px;\n            border: 1px solid #294151;\n            border-radius: 9px;\n            color: #c7dbe8;\n            font-size: 12px;\n        }\n        .new-chat:hover { border-color: #5795b8; background: #0c1c29; }\n        .new-chat svg { width: 14px; height: 14px; color: var(--cyan); }\n        main { max-width: 1120px; margin: auto; padding: 28px 32px 32px; }\n        .banner {\n            height: clamp(220px, 32vh, 350px);\n            overflow: hidden;\n            border: 1px solid #1b374c;\n            border-radius: 18px;\n            background: #030a12;\n            box-shadow: 0 16px 64px #0005;\n        }\n        .banner img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 80%; }\n        .banner--compact { height: 150px; }\n        .banner--compact img { object-position: center 34%; }\n        .welcome { text-align: center; padding: 29px 0 25px; }\n        .eyebrow { margin: 0 0 8px; color: var(--cyan); font-size: 10px; font-weight: 600; letter-spacing: 2px; }\n        h1 { margin: 0; font-size: clamp(23px, 2.8vw, 32px); line-height: 1.3; font-weight: 500; letter-spacing: -.8px; }\n        .welcome-copy { margin: 9px 0 0; color: var(--muted); font-size: 13px; }\n        .conversation { max-width: 900px; margin: auto; padding: 29px 0 8px; }\n        .chat-message { display: flex; align-items: flex-start; gap: 12px; margin: 0 0 25px; }\n        .message-avatar { width: 33px; height: 33px; border: 1px solid #26536d; border-radius: 50%; flex: 0 0 auto; }\n        .message-main { max-width: calc(100% - 45px); min-width: 0; }\n        .message-heading { display: flex; align-items: center; gap: 12px; margin: 0 0 7px; min-height: 25px; }\n        .message-heading strong { font-size: 12px; font-weight: 600; color: #bed1e0; }\n        .message-content { overflow-wrap: anywhere; line-height: 1.8; }\n        .chat-message--user { justify-content: flex-end; }\n        .chat-message--user .message-main { max-width: 82%; }\n        .chat-message--user .message-heading { justify-content: flex-end; }\n        .chat-message--user .message-content {\n            padding: 12px 17px;\n            background: #10283a;\n            border: 1px solid #203f56;\n            border-radius: 15px 3px 15px 15px;\n            color: #e0eff8;\n        }\n        .edit-button { padding: 2px 7px; background: transparent; border: 0; border-radius: 4px; color: var(--muted); font-size: 11px; }\n        .edit-button:hover { color: var(--cyan); background: #112638; }\n        .composer-wrap { max-width: 900px; margin: auto; }\n        .composer {\n            padding: 17px 20px 13px;\n            border: 1px solid #29485f;\n            border-radius: 17px;\n            background: linear-gradient(120deg, #0e1c29, #0a1520);\n            box-shadow: 0 8px 40px #0003;\n        }\n        .composer:focus-within { border-color: #5b9ebf; box-shadow: 0 0 0 3px #3baeff0a; }\n        .composer-label { display: block; color: #b7cddb; font-size: 12px; }\n        textarea {\n            display: block;\n            width: 100%;\n            min-height: 79px;\n            max-height: 260px;\n            padding: 9px 0;\n            border: 0;\n            border-radius: 3px;\n            resize: vertical;\n            background: transparent;\n            color: var(--text);\n            font-size: 15px;\n            line-height: 1.6;\n        }\n        textarea::placeholder { color: #758e9f; }\n        textarea:focus-visible { outline: none; }\n        .composer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 10px; border-top: 1px solid #1d3040; }\n        .keyboard-hint { color: var(--muted); font-size: 11px; }\n        .actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }\n        .send-button {\n            display: inline-flex;\n            align-items: center;\n            justify-content: center;\n            gap: 10px;\n            min-height: 39px;\n            padding: 8px 17px;\n            border: 1px solid #8be0ff;\n            border-radius: 10px;\n            background: var(--cyan);\n            color: #062033;\n            font-size: 12px;\n            font-weight: 650;\n        }\n        .send-button:hover:not(:disabled) { background: #a0e4ff; }\n        .send-button svg { width: 16px; height: 16px; }\n        .cancel-button { padding: 8px 10px; border: 0; border-radius: 8px; background: transparent; color: #b7cddb; font-size: 12px; }\n        .cancel-button:hover { background: #152c3d; }\n        .edit-notice { margin: 0 0 13px; padding: 11px 15px; border-left: 2px solid var(--cyan); border-radius: 0 7px 7px 0; background: #102536; color: #c3deed; font-size: 12px; }\n        .error { padding: 13px 16px; margin: 0 0 15px; border: 1px solid #744a4e; border-radius: 10px; background: #291b24; color: #f3c7c8; font-size: 13px; }\n        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }\n        @media (max-width: 640px) {\n            .topbar-inner { min-height: 70px; padding: 13px 18px; gap: 10px; }\n            .brand { gap: 8px; }\n            .brand-avatar { width: 31px; height: 31px; }\n            .brand-name { font-size: 19px; }\n            .version { display: none; }\n            .new-chat { padding: 8px 10px; font-size: 11px; gap: 6px; }\n            main { padding: 20px 16px 24px; }\n            .banner { height: auto; aspect-ratio: 49 / 18; border-radius: 12px; }\n            .banner img { height: auto; }\n            .banner--compact { height: 100px; aspect-ratio: auto; }\n            .banner--compact img { height: 100%; }\n            .welcome { padding: 30px 6px 27px; }\n            .welcome-copy { max-width: 270px; margin: 11px auto 0; line-height: 1.7; }\n            .composer { padding: 15px 15px 12px; border-radius: 14px; }\n            textarea { font-size: 16px; min-height: 105px; }\n            .composer-bottom { flex-wrap: wrap; gap: 13px; }\n            .keyboard-hint { font-size: 10px; }\n            .actions { margin-left: auto; }\n            .chat-message--user .message-main { max-width: 90%; }\n            .conversation { padding-top: 24px; }\n            .message-content { font-size: 14px; }\n        }\n    </style>\n</head>\n<body>\n    <header class="topbar">\n        <div class="topbar-inner">\n            <a class="brand" href="/" aria-label="Meteor, halaman utama">\n                <img class="brand-avatar" src="/images/profile_picture.png" alt="" width="38" height="38">\n                <span class="brand-name">Meteor</span><span class="version">1.0</span>\n            </a>\n            <a class="new-chat" href="/">\n                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3v14M3 10h14"/></svg>\n                Percakapan baru\n            </a>\n        </div>\n    </header>\n    <main>\n    <div class="banner banner--compact">\n        <img src="/images/banner.png" alt="Meteor 1.0, meteor bercahaya biru melintas di atas Bumi" width="1960" height="720" fetchpriority="high">\n    </div>\n    <form id="chat-form" method="post" action="/" enctype="multipart/form-data">\n        <input type="hidden" name="csrf_token" value="LwWXIxYa4gXGaBpnJRC_K2sbXkfoMwoIq11hexdLF1Y">\n        <input type="hidden" name="history" value="[{&#34;content&#34;: &#34;Halo \\u003cb\\u003e\\&#34;Meteor\\&#34;\\u003c/b\\u003e&#34;, &#34;role&#34;: &#34;user&#34;}, {&#34;content&#34;: &#34;Halo juga!&#34;, &#34;role&#34;: &#34;assistant&#34;}]">\n        <input type="hidden" name="history_signature" value="90fc149aa705dea81a5199e0307349a45e59adf9a8a12dd759eb579d5f58c13d">\n        <input type="hidden" name="edit_index" value="">\n        \n        <section class="conversation" aria-label="Percakapan">\n            <h1 class="visually-hidden">Percakapan dengan Meteor</h1>\n            \n            <article class="chat-message chat-message--user">\n                \n                <div class="message-main">\n                    <div class="message-heading">\n                        <strong>Kamu</strong>\n                        \n                        <button class="edit-button" type="submit" name="edit" value="0" formnovalidate aria-label="Edit pesan 1">Edit</button>\n                        \n                    </div>\n                    <div class="message-content">Halo &lt;b&gt;&#34;Meteor&#34;&lt;/b&gt;</div>\n                </div>\n            </article>\n            \n            <article class="chat-message">\n                <img class="message-avatar" src="/images/profile_picture.png" alt="" width="33" height="33">\n                <div class="message-main">\n                    <div class="message-heading">\n                        <strong>Meteor</strong>\n                        \n                    </div>\n                    <div class="message-content">Halo juga!</div>\n                </div>\n            </article>\n            \n        </section>\n        \n        <div class="composer-wrap">\n        \n        \n        <div class="composer">\n            <label class="composer-label" for="message">Pesan</label>\n            <textarea id="message" name="message" rows="3" cols="30" placeholder="Tulis pesanmu di sini�" aria-describedby="keyboard-hint" required autofocus></textarea>\n            <div class="composer-bottom">\n                <small class="keyboard-hint" id="keyboard-hint">Enter untuk kirim. Shift+Enter untuk baris baru.</small>\n                <div class="actions">\n                    \n                    <button class="send-button" id="send" type="submit">\n                        Kirim\n                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 16V4m-5 5 5-5 5 5"/></svg>\n                    </button>\n                </div>\n            </div>\n        </div>\n        </div>\n    </form>\n    </main>\n    <script nonce="jpDHKlc5nZveQLf8vURfcg">\n        const form = document.getElementById("chat-form");\n        const message = document.getElementById("message");\n        const send = document.getElementById("send");\n        let submitting = false;\n\n        const validateMessage = () => {\n            // Match Python str.strip(): includes NEL/control separators, excludes BOM.\n            const whitespace = /[\\p{White_Space}\\u001c-\\u001f]/u;\n            let start = 0, end = message.value.length;\n            while (start < end && whitespace.test(message.value[start])) start++;\n            while (end > start && whitespace.test(message.value[end - 1])) end--;\n            const text = message.value.slice(start, end);\n            message.setCustomValidity([...text].length > 4000 ? "Pesan maksimal 4.000 karakter." : "");\n        };\n        message.addEventListener("input", validateMessage);\n        validateMessage();\n\n        message.addEventListener("keydown", (event) => {\n            if (event.key === "Enter" && !event.shiftKey && !event.isComposing && event.keyCode !== 229) {\n                event.preventDefault();\n                if (!submitting) form.requestSubmit(send);\n            }\n        });\n\n        form.addEventListener("submit", (event) => {\n            if (submitting) {\n                event.preventDefault();\n                return;\n            }\n            submitting = true;\n            send.disabled = true;\n            message.readOnly = true;\n        });\n\n        window.addEventListener("pageshow", () => {\n            submitting = false;\n            send.disabled = false;\n            message.readOnly = false;\n        });\n    </script>\n</body>\n</html>'
+
+----------------------------------------------------------------------
+Ran 53 tests in 1.164s
+
+FAILED (failures=1)

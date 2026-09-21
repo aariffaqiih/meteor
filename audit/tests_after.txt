@@ -1,0 +1,181 @@
+test_bad_provider_responses_and_embedded_errors_fall_back (test_app.ChatTests.test_bad_provider_responses_and_embedded_errors_fall_back) ... [2026-09-17 13:23:19,571] WARNING in app: API 1 (openrouter) gagal: HTTP 502
+[2026-09-17 13:23:19,573] WARNING in app: API 2 (groq) gagal: HTTP 429
+[2026-09-17 13:23:19,573] WARNING in app: API 3 (openrouter) gagal: HTTP 502
+[2026-09-17 13:23:19,573] WARNING in app: API 4 (groq) gagal: HTTP 502
+ok
+test_edit_and_cancel_preserve_history_without_using_api (test_app.ChatTests.test_edit_and_cancel_preserve_history_without_using_api) ... ok
+test_edit_regenerates_from_that_turn_and_discards_later_turns (test_app.ChatTests.test_edit_regenerates_from_that_turn_and_discards_later_turns) ... ok
+test_failed_edit_keeps_original_history_and_draft (test_app.ChatTests.test_failed_edit_keeps_original_history_and_draft) ... [2026-09-17 13:23:19,608] WARNING in app: API 1 (openrouter) gagal: HTTP 503
+[2026-09-17 13:23:19,608] WARNING in app: API 2 (groq) gagal: HTTP 503
+[2026-09-17 13:23:19,608] WARNING in app: API 3 (openrouter) gagal: HTTP 503
+[2026-09-17 13:23:19,608] WARNING in app: API 4 (groq) gagal: HTTP 503
+[2026-09-17 13:23:19,608] WARNING in app: API 5 (openrouter) gagal: HTTP 503
+[2026-09-17 13:23:19,608] WARNING in app: API 6 (groq) gagal: HTTP 503
+ok
+test_failure_keeps_user_message_and_previous_history (test_app.ChatTests.test_failure_keeps_user_message_and_previous_history) ... [2026-09-17 13:23:19,617] WARNING in app: API 1 (openrouter) gagal: HTTP 503
+[2026-09-17 13:23:19,617] WARNING in app: API 2 (groq) gagal: HTTP 503
+[2026-09-17 13:23:19,617] WARNING in app: API 3 (openrouter) gagal: HTTP 503
+[2026-09-17 13:23:19,617] WARNING in app: API 4 (groq) gagal: HTTP 503
+[2026-09-17 13:23:19,617] WARNING in app: API 5 (openrouter) gagal: HTTP 503
+[2026-09-17 13:23:19,617] WARNING in app: API 6 (groq) gagal: HTTP 503
+ok
+test_groq_requires_free_plan_confirmation (test_app.ChatTests.test_groq_requires_free_plan_confirmation) ... ok
+test_html_round_trip_preserves_context_and_escapes_content (test_app.ChatTests.test_html_round_trip_preserves_context_and_escapes_content) ... ok
+test_identity_filter_blocks_names_and_common_obfuscations (test_app.ChatTests.test_identity_filter_blocks_names_and_common_obfuscations) ... ok
+test_inline_script_nonce_matches_csp_and_changes_per_request (test_app.ChatTests.test_inline_script_nonce_matches_csp_and_changes_per_request) ... ok
+test_invalid_edit_index_cannot_change_assistant_or_call_api (test_app.ChatTests.test_invalid_edit_index_cannot_change_assistant_or_call_api) ... ok
+test_invalid_inputs_do_not_call_provider (test_app.ChatTests.test_invalid_inputs_do_not_call_provider) ... ok
+test_legitimate_explanation_of_safety_label_is_not_filtered (test_app.ChatTests.test_legitimate_explanation_of_safety_label_is_not_filtered) ... ok
+test_long_history_keeps_complete_recent_turns (test_app.ChatTests.test_long_history_keeps_complete_recent_turns) ... ok
+test_missing_keys_returns_useful_error (test_app.ChatTests.test_missing_keys_returns_useful_error) ... ok
+test_moderation_model_response_is_rejected_and_falls_back (test_app.ChatTests.test_moderation_model_response_is_rejected_and_falls_back) ... [2026-09-17 13:23:19,706] WARNING in app: API 1 (openrouter) gagal: HTTP 502
+ok
+test_no_credentials_served (test_app.ChatTests.test_no_credentials_served) ... ok
+test_pinned_model_accepts_canonical_response_name (test_app.ChatTests.test_pinned_model_accepts_canonical_response_name) ... ok
+test_provider_identity_leak_is_replaced_before_render_and_history (test_app.ChatTests.test_provider_identity_leak_is_replaced_before_render_and_history) ... ok
+test_rate_limited_keys_are_not_retried_during_cooldown (test_app.ChatTests.test_rate_limited_keys_are_not_retried_during_cooldown) ... [2026-09-17 13:23:19,720] WARNING in app: API 1 (openrouter) gagal: HTTP 429
+[2026-09-17 13:23:19,720] WARNING in app: API 2 (groq) gagal: HTTP 429
+[2026-09-17 13:23:19,720] WARNING in app: API 3 (openrouter) gagal: HTTP 429
+[2026-09-17 13:23:19,720] WARNING in app: API 4 (groq) gagal: HTTP 429
+[2026-09-17 13:23:19,720] WARNING in app: API 5 (openrouter) gagal: HTTP 429
+[2026-09-17 13:23:19,720] WARNING in app: API 6 (groq) gagal: HTTP 429
+ok
+test_retry_after_http_date (test_app.ChatTests.test_retry_after_http_date) ... ok
+test_untrusted_assistant_history_is_filtered_on_edit_and_inference (test_app.ChatTests.test_untrusted_assistant_history_is_filtered_on_edit_and_inference) ... ok
+test_uses_free_models_and_falls_back_through_all_six_keys (test_app.ChatTests.test_uses_free_models_and_falls_back_through_all_six_keys) ... [2026-09-17 13:23:19,734] WARNING in app: API 1 (openrouter) gagal: HTTP 429
+[2026-09-17 13:23:19,734] WARNING in app: API 2 (groq) gagal: HTTP 401
+[2026-09-17 13:23:19,734] WARNING in app: API 3 (openrouter) gagal: HTTP 402
+[2026-09-17 13:23:19,734] WARNING in app: API 4 (groq) gagal: HTTP 503
+[2026-09-17 13:23:19,734] WARNING in app: API 5 (openrouter) gagal: HTTP 502
+ok
+test_additional_encoding_and_greek_homoglyph_bypasses (test_hardening.HardeningTests.test_additional_encoding_and_greek_homoglyph_bypasses) ... ok
+test_all_cooling_keys_fail_clearly_without_network (test_hardening.HardeningTests.test_all_cooling_keys_fail_clearly_without_network) ... ok
+test_browser_form_round_trip_at_emoji_limits (test_hardening.HardeningTests.test_browser_form_round_trip_at_emoji_limits) ... ok
+test_connection_is_reused_without_sharing_cookies_or_authorization (test_hardening.HardeningTests.test_connection_is_reused_without_sharing_cookies_or_authorization) ... ok
+test_context_and_request_body_limits (test_hardening.HardeningTests.test_context_and_request_body_limits) ... ok
+test_cross_origin_post_does_not_reach_provider (test_hardening.HardeningTests.test_cross_origin_post_does_not_reach_provider) ... ok
+test_deep_json_history_returns_400_instead_of_runtime_error (test_hardening.HardeningTests.test_deep_json_history_returns_400_instead_of_runtime_error) ... ok
+test_deep_provider_json_falls_back (test_hardening.HardeningTests.test_deep_provider_json_falls_back) ... [2026-09-17 13:23:20,327] WARNING in app: API 1 (groq) gagal: HTTP 502
+ok
+test_embedded_infinite_error_code_falls_back (test_hardening.HardeningTests.test_embedded_infinite_error_code_falls_back) ... [2026-09-17 13:23:20,331] WARNING in app: API 1 (groq) gagal: HTTP 502
+ok
+test_excess_multipart_parts_are_rejected_before_provider_call (test_hardening.HardeningTests.test_excess_multipart_parts_are_rejected_before_provider_call) ... ok
+test_fallback_stops_starting_requests_after_elapsed_budget (test_hardening.HardeningTests.test_fallback_stops_starting_requests_after_elapsed_budget) ... [2026-09-17 13:23:20,339] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,341] WARNING in app: API 2 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,341] WARNING in app: API 3 (groq) gagal: HTTP 502
+ok
+test_forged_assistant_history_is_rejected (test_hardening.HardeningTests.test_forged_assistant_history_is_rejected) ... ok
+test_history_rejects_lone_surrogates_and_oversized_user_messages (test_hardening.HardeningTests.test_history_rejects_lone_surrogates_and_oversized_user_messages) ... ok
+test_http_and_schema_failure_matrix (test_hardening.HardeningTests.test_http_and_schema_failure_matrix) ... [2026-09-17 13:23:20,358] WARNING in app: API 1 (groq) gagal: HTTP 301
+[2026-09-17 13:23:20,366] WARNING in app: API 1 (groq) gagal: HTTP 400
+[2026-09-17 13:23:20,373] WARNING in app: API 1 (groq) gagal: HTTP 401
+[2026-09-17 13:23:20,376] WARNING in app: API 1 (groq) gagal: HTTP 402
+[2026-09-17 13:23:20,380] WARNING in app: API 1 (groq) gagal: HTTP 403
+[2026-09-17 13:23:20,383] WARNING in app: API 1 (groq) gagal: HTTP 408
+[2026-09-17 13:23:20,386] WARNING in app: API 1 (groq) gagal: HTTP 429
+[2026-09-17 13:23:20,392] WARNING in app: API 1 (groq) gagal: HTTP 500
+[2026-09-17 13:23:20,396] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,403] WARNING in app: API 1 (groq) gagal: HTTP 503
+[2026-09-17 13:23:20,409] WARNING in app: API 1 (groq) gagal: HTTP 504
+[2026-09-17 13:23:20,414] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,418] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,421] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,424] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,429] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,433] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,436] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,438] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,443] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,450] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,456] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,461] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,468] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,472] WARNING in app: API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,476] WARNING in app: API 1 (groq) gagal: HTTP 502
+ok
+test_launcher_suppresses_access_queries_and_declares_threading (test_hardening.HardeningTests.test_launcher_suppresses_access_queries_and_declares_threading) ... ok
+test_local_request_budget_returns_429_without_more_provider_calls (test_hardening.HardeningTests.test_local_request_budget_returns_429_without_more_provider_calls) ... [2026-09-17 13:23:20,500] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,504] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,506] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,512] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,514] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,514] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,527] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,530] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,536] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,539] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,544] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,547] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,551] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,558] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,561] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,568] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,572] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,576] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,580] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,586] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_malformed_origin_is_a_client_error_without_provider_call (test_hardening.HardeningTests.test_malformed_origin_is_a_client_error_without_provider_call) ... ok
+test_markup_is_escaped_including_formaction_and_event_handlers (test_hardening.HardeningTests.test_markup_is_escaped_including_formaction_and_event_handlers) ... [2026-09-17 13:23:20,608] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_missing_csrf_and_cross_session_history_are_rejected (test_hardening.HardeningTests.test_missing_csrf_and_cross_session_history_are_rejected) ... [2026-09-17 13:23:20,613] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_oversized_answer_cannot_silently_erase_conversation (test_hardening.HardeningTests.test_oversized_answer_cannot_silently_erase_conversation) ... [2026-09-17 13:23:20,624] WARNING in app: API 1 (groq) gagal: HTTP 502
+WARNING:app:API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,624] INFO in app: API 2 (groq): model openai/gpt-oss-20b
+INFO:app:API 2 (groq): model openai/gpt-oss-20b
+ok
+test_parallel_requests_do_not_call_a_busy_key_twice (test_hardening.HardeningTests.test_parallel_requests_do_not_call_a_busy_key_twice) ... [2026-09-17 13:23:20,626] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_provider_errors_and_metadata_do_not_leak_to_page_or_app_logs (test_hardening.HardeningTests.test_provider_errors_and_metadata_do_not_leak_to_page_or_app_logs) ... ok
+test_response_size_is_bounded_and_connections_are_closed (test_hardening.HardeningTests.test_response_size_is_bounded_and_connections_are_closed) ... [2026-09-17 13:23:20,643] WARNING in app: API 1 (groq) gagal: HTTP 502
+WARNING:app:API 1 (groq) gagal: HTTP 502
+[2026-09-17 13:23:20,644] INFO in app: API 2 (groq): model openai/gpt-oss-20b
+INFO:app:API 2 (groq): model openai/gpt-oss-20b
+ok
+test_retry_after_is_finite_and_bounded (test_hardening.HardeningTests.test_retry_after_is_finite_and_bounded) ... ok
+test_retry_defaults_and_elapsed_cooldown_recovery (test_hardening.HardeningTests.test_retry_defaults_and_elapsed_cooldown_recovery) ... [2026-09-17 13:23:20,647] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_role_schema_empty_edit_and_unicode_boundaries (test_hardening.HardeningTests.test_role_schema_empty_edit_and_unicode_boundaries) ... [2026-09-17 13:23:20,684] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,690] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,694] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,700] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+[2026-09-17 13:23:20,703] INFO in app: API 1 (groq): model openai/gpt-oss-20b
+INFO:app:API 1 (groq): model openai/gpt-oss-20b
+ok
+test_unexpected_exception_does_not_expose_message_or_traceback (test_hardening.HardeningTests.test_unexpected_exception_does_not_expose_message_or_traceback) ... ok
+test_untrusted_host_is_rejected (test_hardening.HardeningTests.test_untrusted_host_is_rejected) ... ok
+test_weak_explicit_signing_secret_is_rejected_without_echoing_it (test_hardening.HardeningTests.test_weak_explicit_signing_secret_is_rejected_without_echoing_it) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 1.187s
+
+OK
