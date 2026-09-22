@@ -3,27 +3,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#050b12">
+    <meta name="theme-color" content="#000000">
     <title>Meteor</title>
-    <link rel="icon" type="image/png" href="images/profile_picture.png">
+    <link rel="icon" type="image/png" href="images/new_profile_picture.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <style>
         :root {
             color-scheme: dark;
-            --background: #071016;
-            --surface: #0d1921;
-            --surface-raised: #11212b;
-            --line: #213743;
-            --text: #eff6f8;
-            --muted: #93a6af;
-            --meteor: #8ccfe8;
-            --meteor-ink: #09202b;
+            --background: #000000;
+            --text: #e8ecee;
+            --muted: #8a9199;
+            --user-bubble: #1a2740;
+            --user-bubble-border: #293d5a;
+            --input-bg: #1a1d20;
+            --input-border: #2a2d32;
+            --send-bg: #3a3d42;
+            --send-active: #1a3a6a;
         }
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            margin: 0;
             background: var(--background);
             color: var(--text);
             font-family: "Instrument Sans", sans-serif;
@@ -32,204 +32,297 @@
             font-size: 16px;
             line-height: 1.65;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         button, textarea { font: inherit; }
         button, a, textarea { -webkit-tap-highlight-color: transparent; }
         button, a { touch-action: manipulation; }
         a { color: inherit; text-decoration: none; }
-        button { cursor: pointer; }
+        button { cursor: pointer; border: 0; background: transparent; }
         button:disabled { cursor: wait; opacity: .55; }
         a:focus-visible, button:focus-visible, textarea:focus-visible {
-            outline: 2px solid var(--meteor);
+            outline: 2px solid #4a8ab5;
             outline-offset: 3px;
         }
-        .topbar { background: var(--background); }
-        .topbar-inner {
-            max-width: 680px;
-            min-height: 58px;
-            margin: auto;
-            padding: 12px 0;
+
+        /* ============ LANDING VIEW ============ */
+        .landing {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-        .brand { display: inline-flex; align-items: center; gap: 8px; }
-        .brand-avatar { width: 24px; height: 24px; border: 0; border-radius: 50%; }
-        .brand-name { font-size: 15px; font-weight: 620; letter-spacing: -.35px; }
-        .new-chat {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 0;
-            color: #768e99;
-            font-size: 12px;
-            font-weight: 510;
-        }
-        .new-chat:hover { color: var(--meteor); }
-        .new-chat:active, .send-button:active, .cancel-button:active { transform: translateY(1px); }
-        main { max-width: 680px; margin: auto; padding: 78px 0 40px; }
-        .banner {
-            display: none;
-        }
-        .welcome { max-width: 500px; padding: 0 0 34px; }
-        h1 { margin: 0; font-size: clamp(26px, 4vw, 34px); line-height: 1.16; font-weight: 540; letter-spacing: -1.2px; }
-        .welcome-copy { max-width: 44ch; margin: 8px 0 0; color: #8298a2; font-size: 14px; }
-        .conversation { max-width: 640px; margin: auto; padding: 0 0 22px; }
-        .chat-message { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 28px; }
-        .message-avatar { width: 22px; height: 22px; margin-top: 3px; border: 0; border-radius: 50%; flex: 0 0 auto; }
-        .message-main { max-width: calc(100% - 38px); min-width: 0; }
-        .message-heading { display: flex; align-items: center; gap: 8px; margin: 0 0 3px; min-height: 20px; }
-        .message-heading strong { font-size: 12px; font-weight: 570; color: #a9bbc2; }
-        .message-content { overflow-wrap: anywhere; color: #d9e4e8; line-height: 1.76; }
-        .chat-message--user { justify-content: flex-end; }
-        .chat-message--user .message-main { max-width: min(82%, 530px); }
-        .chat-message--user .message-heading { justify-content: flex-end; }
-        .chat-message--user .message-content {
-            padding: 0;
-            background: transparent;
-            border: 0;
-            border-radius: 0;
-            color: #c7d7dc;
-        }
-        .edit-button { padding: 1px 4px; background: transparent; border: 0; border-radius: 3px; color: #718892; font-size: 11px; }
-        .edit-button:hover { color: var(--meteor); }
-        .composer-wrap { max-width: 640px; margin: auto; }
-        .composer {
-            padding: 0 0 9px;
-            border: 0;
-            border-bottom: 1px solid rgb(174 218 234 / .2);
-            border-radius: 0;
-            background: transparent;
-            box-shadow: none;
-        }
-        .composer:focus-within { border-color: var(--meteor); }
-        .composer-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-        textarea {
-            display: block;
-            width: 100%;
-            min-height: 62px;
-            max-height: 220px;
-            padding: 0 0 10px;
-            border: 0;
-            border-radius: 3px;
-            resize: vertical;
-            background: transparent;
-            color: var(--text);
-            font-size: 16px;
-            line-height: 1.65;
-        }
-        textarea::placeholder { color: #718891; }
-        textarea:focus-visible { outline: none; }
-        .composer-bottom { display: flex; justify-content: flex-end; align-items: center; gap: 12px; padding-top: 0; border: 0; }
-        .keyboard-hint { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-        .actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
-        .send-button {
-            display: inline-flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 28px;
-            padding: 3px 0;
-            border: 0;
-            border-radius: 0;
-            background: transparent;
-            color: var(--meteor);
-            font-size: 13px;
-            font-weight: 600;
-            transition: color .16s ease, transform .16s ease;
+            min-height: 100vh;
+            padding: 0 20px;
         }
-        .send-button:hover:not(:disabled) { color: #c5ecf8; }
-        .cancel-button { padding: 3px 7px; border: 0; border-radius: 0; background: transparent; color: #8299a2; font-size: 13px; }
-        .cancel-button:hover { color: var(--text); }
-        .edit-notice { margin: 0 0 13px; padding: 10px 13px; border-left: 2px solid var(--meteor); border-radius: 0 6px 6px 0; background: rgb(140 207 232 / .07); color: #c5d9e1; font-size: 13px; }
-        .error { padding: 11px 13px; margin: 0 0 14px; border: 1px solid #714e54; border-radius: 10px; background: #291d22; color: #f0c8cd; font-size: 13px; }
-        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+        .landing-banner {
+            max-width: 820px;
+            width: 100%;
+            margin-bottom: 32px;
+        }
+        .landing-banner img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        /* ============ CHAT VIEW ============ */
+        .chat-view {
+            display: none;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Header */
+        .chat-header {
+            position: relative;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .chat-header img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .chat-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, var(--background));
+        }
+
+        /* Messages */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 20px 10px;
+        }
+        .chat-messages-inner {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* User message */
+        .msg-user {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 24px;
+        }
+        .msg-user-bubble {
+            max-width: min(80%, 600px);
+            padding: 12px 20px;
+            background: var(--user-bubble);
+            border: 1px solid var(--user-bubble-border);
+            border-radius: 20px;
+            color: #d4dce4;
+            line-height: 1.65;
+            overflow-wrap: anywhere;
+        }
+
+        /* Assistant message */
+        .msg-assistant {
+            margin-bottom: 24px;
+            padding: 0;
+        }
+        .msg-assistant-content {
+            max-width: 820px;
+            color: #d0d6db;
+            line-height: 1.76;
+            overflow-wrap: anywhere;
+        }
+
+        /* Typing dots */
         .typing-dots { display: inline-flex; gap: 5px; padding: 10px 0; }
-        .typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--meteor); opacity: .3; animation: pulse 1.2s infinite ease-in-out; }
+        .typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: #6ba3c7; opacity: .3; animation: pulse 1.2s infinite ease-in-out; }
         .typing-dots span:nth-child(2) { animation-delay: .2s; }
         .typing-dots span:nth-child(3) { animation-delay: .4s; }
         @keyframes pulse { 50% { opacity: 1; } }
-        .config-notice {
-            max-width: 640px; margin: 26px auto; padding: 0;
-            border: 0; border-radius: 0;
-            background: transparent; color: #9aafb7; font-size: 13px; line-height: 1.7;
+
+        /* ============ INPUT BAR (shared) ============ */
+        .input-bar {
+            max-width: 820px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
         }
-        .config-notice code { background: transparent; padding: 0; border-radius: 0; font-size: 12px; }
+        .input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 6px 6px 20px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 50px;
+        }
+        .input-wrap:focus-within {
+            border-color: #3a5570;
+        }
+        .input-wrap textarea {
+            flex: 1;
+            display: block;
+            width: 100%;
+            min-height: 24px;
+            max-height: 120px;
+            padding: 8px 0;
+            border: 0;
+            resize: none;
+            background: transparent;
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .input-wrap textarea::placeholder { color: #5a5f66; }
+        .input-wrap textarea:focus-visible { outline: none; }
+        .send-btn {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--send-bg);
+            color: #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .15s, color .15s, transform .1s;
+        }
+        .send-btn.active {
+            background: var(--send-active);
+            border: 1.5px solid #3a6aaa;
+            color: #c0d8f0;
+        }
+        .send-btn:active:not(:disabled) { transform: scale(0.94); }
+        .send-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Landing input positioning */
+        .landing .input-bar {
+            max-width: 820px;
+        }
+
+        /* Chat input positioning */
+        .chat-input-area {
+            flex-shrink: 0;
+            padding: 12px 20px 20px;
+        }
+        .chat-input-area .input-bar {
+            max-width: 820px;
+        }
+
+        /* Edit/Error notices */
+        .edit-notice {
+            max-width: 820px;
+            margin: 0 auto 10px;
+            padding: 10px 16px;
+            border-left: 2px solid #4a8ab5;
+            border-radius: 0 8px 8px 0;
+            background: rgba(74, 138, 181, 0.08);
+            color: #b0cede;
+            font-size: 13px;
+        }
+        .error {
+            max-width: 820px;
+            margin: 0 auto 10px;
+            padding: 12px 16px;
+            border: 1px solid #714e54;
+            border-radius: 12px;
+            background: #1a1114;
+            color: #f0c8cd;
+            font-size: 13px;
+        }
+        .edit-button {
+            padding: 2px 8px;
+            color: #718892;
+            font-size: 11px;
+            border-radius: 4px;
+        }
+        .edit-button:hover { color: #a0c8d8; }
+        .cancel-button {
+            padding: 6px 12px;
+            color: #8a9199;
+            font-size: 13px;
+            border-radius: 8px;
+        }
+        .cancel-button:hover { color: var(--text); }
+
+        .config-notice {
+            max-width: 820px;
+            margin: 20px auto;
+            padding: 0 20px;
+            color: #6a7480;
+            font-size: 13px;
+            line-height: 1.7;
+            text-align: center;
+        }
+        .config-notice code { background: transparent; padding: 0; font-size: 12px; }
+
+        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
         }
+
         @media (max-width: 640px) {
-            .topbar-inner { min-height: 56px; padding: 11px 18px; gap: 10px; }
-            .brand { gap: 8px; }
-            .brand-avatar { width: 23px; height: 23px; }
-            .brand-name { font-size: 16px; }
-            .new-chat { padding: 4px 0; font-size: 12px; }
-            main { padding: 60px 20px 28px; }
-            .welcome { padding: 0 0 28px; }
-            h1 { font-size: 27px; letter-spacing: -1px; }
-            .welcome-copy { max-width: 32ch; margin: 8px 0 0; line-height: 1.65; font-size: 14px; }
-            textarea { font-size: 16px; min-height: 62px; }
-            .composer-bottom { gap: 12px; }
-            .actions { margin-left: auto; }
-            .chat-message--user .message-main { max-width: 91%; }
-            .conversation { padding-top: 28px; }
-            .message-content { font-size: 15px; }
+            .landing { padding: 0 16px; }
+            .landing-banner { margin-bottom: 24px; }
+            .input-wrap { padding: 4px 4px 4px 16px; }
+            .input-wrap textarea { font-size: 16px; }
+            .chat-messages { padding: 16px 16px 8px; }
+            .chat-input-area { padding: 10px 16px 16px; }
+            .msg-user-bubble { max-width: 90%; font-size: 15px; }
+            .msg-assistant-content { font-size: 15px; }
+            .send-btn { width: 36px; height: 36px; }
         }
     </style>
 </head>
 <body>
-    <header class="topbar">
-        <div class="topbar-inner">
-            <a class="brand" href="#" onclick="newChat(); return false;" aria-label="Meteor, halaman utama">
-                <img class="brand-avatar" src="images/profile_picture.png" alt="" width="38" height="38">
-                <span class="brand-name">Meteor</span>
-            </a>
-            <a class="new-chat" href="#" onclick="newChat(); return false;">
-                Percakapan baru
-            </a>
+    <!-- ============ LANDING ============ -->
+    <div id="landing" class="landing">
+        <div class="landing-banner">
+            <img src="images/new_banner.png" alt="Meteor 1.0" width="1960" height="720" fetchpriority="high">
         </div>
-    </header>
-    <main>
-        <div id="banner" class="banner">
-            <img src="images/banner.png" alt="Meteor 1.0, meteor bercahaya biru melintas di atas Bumi" width="1960" height="720" fetchpriority="high">
-        </div>
-
-        <section id="welcome">
-            <div class="welcome">
-                <h1>Apa yang ingin kamu jelajahi?</h1>
-                <p class="welcome-copy">Mulai dari pertanyaan kecil, ide besar, atau sekadar cerita.</p>
-            </div>
-        </section>
-
-        <section id="conversation" class="conversation" aria-label="Percakapan" style="display:none">
-            <h1 class="visually-hidden">Percakapan dengan Meteor</h1>
-        </section>
-
-        <div class="composer-wrap">
-            <p id="error-box" class="error" role="alert" style="display:none"></p>
-            <p id="edit-notice" class="edit-notice" style="display:none">Menyimpan edit akan membuat jawaban baru dan menghapus pesan setelahnya.</p>
-            <div class="composer">
-                <label class="composer-label" for="message" id="composer-label">Pesan</label>
-                <textarea id="message" rows="3" cols="30" placeholder="Tulis pesanmu di sini…" aria-describedby="keyboard-hint" autofocus></textarea>
-                <div class="composer-bottom">
-                    <small class="keyboard-hint" id="keyboard-hint">Enter untuk kirim. Shift+Enter untuk baris baru.</small>
-                    <div class="actions">
-                        <button class="cancel-button" id="cancel-btn" style="display:none" onclick="cancelEdit()">Batal</button>
-                        <button class="send-button" id="send" onclick="handleSend()">
-                            <span id="send-label">Kirim</span>
-                        </button>
-                    </div>
-                </div>
+        <div class="input-bar">
+            <div class="input-wrap">
+                <textarea id="message-landing" rows="1" placeholder="Ask anything" aria-label="Ask anything"></textarea>
+                <button class="send-btn" id="send-landing" onclick="handleSendFromLanding()" aria-label="Kirim">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+                </button>
             </div>
         </div>
-
         <div id="no-keys-notice" class="config-notice" style="display:none">
             ⚠️ Belum ada API key. Buka file <code>config.js</code>, lalu isi
             <code>CONFIG_API_KEYS</code>.
-            Contoh:<br>
-            <code>{ key: "sk-or-v1-abc...", provider: "openrouter" }</code><br>
-            <code>{ key: "gsk_abc...", provider: "groq" }</code>
         </div>
-    </main>
+    </div>
+
+    <!-- ============ CHAT VIEW ============ -->
+    <div id="chat-view" class="chat-view">
+        <div class="chat-header">
+            <img src="images/header.png" alt="Meteor 1.0" width="1960" height="140">
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-messages-inner" id="conversation">
+                <h1 class="visually-hidden">Percakapan dengan Meteor</h1>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <p id="error-box" class="error" role="alert" style="display:none"></p>
+            <p id="edit-notice" class="edit-notice" style="display:none">Menyimpan edit akan membuat jawaban baru dan menghapus pesan setelahnya.</p>
+            <div class="input-bar">
+                <div class="input-wrap">
+                    <textarea id="message-chat" rows="1" placeholder="Ask anything" aria-label="Ask anything"></textarea>
+                    <button class="cancel-button" id="cancel-btn" style="display:none" onclick="cancelEdit()">Batal</button>
+                    <button class="send-btn" id="send-chat" onclick="handleSend()" aria-label="Kirim">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <script src="config.js"></script>
 <script>
@@ -284,21 +377,73 @@ let history = [];
 let editIndex = null;
 let isLoading = false;
 let abortController = null;
+let currentView = "landing"; // "landing" or "chat"
 
 // ============================================================
 //  DOM
 // ============================================================
 const $ = (id) => document.getElementById(id);
-const msgInput = $("message");
-const sendBtn = $("send");
-const sendLabel = $("send-label");
+const landingEl = $("landing");
+const chatViewEl = $("chat-view");
+const msgLanding = $("message-landing");
+const msgChat = $("message-chat");
+const sendLanding = $("send-landing");
+const sendChat = $("send-chat");
 const cancelBtn = $("cancel-btn");
 const editNotice = $("edit-notice");
 const errorBox = $("error-box");
-const banner = $("banner");
-const welcomeEl = $("welcome");
 const conversationEl = $("conversation");
+const chatMessagesEl = $("chat-messages");
 const noKeysNotice = $("no-keys-notice");
+
+// Active textarea helper
+function getActiveInput() {
+    return currentView === "landing" ? msgLanding : msgChat;
+}
+function getActiveSendBtn() {
+    return currentView === "landing" ? sendLanding : sendChat;
+}
+
+// ============================================================
+//  VIEW SWITCHING
+// ============================================================
+function showLanding() {
+    currentView = "landing";
+    landingEl.style.display = "";
+    chatViewEl.style.display = "none";
+    msgLanding.focus();
+}
+
+function showChatView() {
+    currentView = "chat";
+    landingEl.style.display = "none";
+    chatViewEl.style.display = "flex";
+    msgChat.focus();
+}
+
+// ============================================================
+//  SEND BUTTON STATE
+// ============================================================
+function updateSendButton(textarea, btn) {
+    if (textarea.value.trim().length > 0) {
+        btn.classList.add("active");
+    } else {
+        btn.classList.remove("active");
+    }
+}
+
+msgLanding.addEventListener("input", () => updateSendButton(msgLanding, sendLanding));
+msgChat.addEventListener("input", () => updateSendButton(msgChat, sendChat));
+
+// ============================================================
+//  AUTO-RESIZE TEXTAREA
+// ============================================================
+function autoResize(textarea) {
+    textarea.style.height = "auto";
+    textarea.style.height = Math.min(textarea.scrollHeight, 120) + "px";
+}
+msgLanding.addEventListener("input", () => autoResize(msgLanding));
+msgChat.addEventListener("input", () => autoResize(msgChat));
 
 // ============================================================
 //  IDENTITY FILTER (sederhana, sisi klien)
@@ -434,31 +579,28 @@ function formatContent(text) {
 
 function renderChat() {
     if (history.length === 0) {
-        welcomeEl.style.display = "";
-        conversationEl.style.display = "none";
-        banner.className = "banner";
+        showLanding();
+        conversationEl.innerHTML = '<h1 class="visually-hidden">Percakapan dengan Meteor</h1>';
     } else {
-        welcomeEl.style.display = "none";
-        conversationEl.style.display = "";
-        banner.className = "banner banner--compact";
+        showChatView();
 
         let html = '<h1 class="visually-hidden">Percakapan dengan Meteor</h1>';
         history.forEach((item, i) => {
             const isUser = item.role === "user";
-            html += `<article class="chat-message${isUser ? " chat-message--user" : ""}">`;
-            if (!isUser) {
-                html += `<img class="message-avatar" src="images/profile_picture.png" alt="" width="33" height="33">`;
+            if (isUser) {
+                html += `<div class="msg-user">`;
+                html += `<div class="msg-user-bubble">`;
+                html += formatContent(item.content);
+                if (!isLoading) {
+                    html += ` <button class="edit-button" onclick="startEdit(${i})" aria-label="Edit pesan">Edit</button>`;
+                }
+                html += `</div></div>`;
+            } else {
+                html += `<div class="msg-assistant">`;
+                html += `<div class="msg-assistant-content" ${i === history.length - 1 ? 'id="streaming-target"' : ""}>`;
+                html += formatContent(item.content);
+                html += `</div></div>`;
             }
-            html += `<div class="message-main">`;
-            html += `<div class="message-heading">`;
-            html += `<strong>${isUser ? "Kamu" : "Meteor"}</strong>`;
-            if (isUser && !isLoading) {
-                html += ` <button class="edit-button" onclick="startEdit(${i})" aria-label="Edit pesan">Edit</button>`;
-            }
-            html += `</div>`;
-            html += `<div class="message-content" ${i === history.length - 1 && !isUser ? 'id="streaming-target"' : ""}>`;
-            html += formatContent(item.content);
-            html += `</div></div></article>`;
         });
         conversationEl.innerHTML = html;
     }
@@ -467,15 +609,11 @@ function renderChat() {
 
 function showTypingIndicator() {
     const html = `
-        <article class="chat-message" id="typing-indicator">
-            <img class="message-avatar" src="images/profile_picture.png" alt="" width="33" height="33">
-            <div class="message-main">
-                <div class="message-heading"><strong>Meteor</strong></div>
-                <div class="message-content" id="streaming-target">
-                    <div class="typing-dots"><span></span><span></span><span></span></div>
-                </div>
+        <div class="msg-assistant" id="typing-indicator">
+            <div class="msg-assistant-content" id="streaming-target">
+                <div class="typing-dots"><span></span><span></span><span></span></div>
             </div>
-        </article>`;
+        </div>`;
     conversationEl.insertAdjacentHTML("beforeend", html);
     scrollToBottom();
 }
@@ -503,17 +641,36 @@ function hideError() {
 }
 
 function scrollToBottom() {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    if (currentView === "chat") {
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+    }
 }
 
 // ============================================================
 //  ACTIONS
 // ============================================================
+function handleSendFromLanding() {
+    if (isLoading) return;
+    const text = msgLanding.value.trim();
+    if (!text) return;
+    // Transfer text to chat input
+    msgChat.value = "";
+    msgLanding.value = "";
+    // Switch to chat view and send
+    sendMessage(text);
+}
+
 async function handleSend() {
     if (isLoading) return;
-
-    const text = msgInput.value.trim();
+    const text = msgChat.value.trim();
     if (!text) return;
+    msgChat.value = "";
+    updateSendButton(msgChat, sendChat);
+    autoResize(msgChat);
+    sendMessage(text);
+}
+
+async function sendMessage(text) {
     if ([...text].length > MAX_MESSAGE) {
         showError(`Pesan maksimal ${MAX_MESSAGE.toLocaleString("id")} karakter.`);
         return;
@@ -521,8 +678,8 @@ async function handleSend() {
 
     hideError();
     isLoading = true;
-    sendBtn.disabled = true;
-    msgInput.readOnly = true;
+    const btn = getActiveSendBtn();
+    btn.disabled = true;
 
     // Jika edit, potong riwayat
     if (editIndex !== null) {
@@ -537,9 +694,11 @@ async function handleSend() {
         history.splice(0, 2);
     }
 
-    msgInput.value = "";
     renderChat();
     showTypingIndicator();
+
+    // Make chat input read-only during loading
+    msgChat.readOnly = true;
 
     try {
         const messages = history.map((m) => ({ role: m.role, content: m.content }));
@@ -556,7 +715,8 @@ async function handleSend() {
         if (err.name !== "AbortError") {
             showError(err.message || "Terjadi kesalahan. Coba lagi.");
             // Kembalikan pesan ke textarea agar bisa di-retry
-            msgInput.value = text;
+            msgChat.value = text;
+            updateSendButton(msgChat, sendChat);
             // Hapus pesan user yang gagal dari riwayat
             if (history.length && history[history.length - 1].role === "user") {
                 history.pop();
@@ -565,36 +725,37 @@ async function handleSend() {
         }
     } finally {
         isLoading = false;
-        sendBtn.disabled = false;
-        msgInput.readOnly = false;
-        msgInput.focus();
+        sendChat.disabled = false;
+        sendLanding.disabled = false;
+        msgChat.readOnly = false;
+        msgChat.focus();
     }
 }
 
 function startEdit(index) {
     if (isLoading) return;
     editIndex = index;
-    msgInput.value = history[index].content;
-    sendLabel.textContent = "Simpan dan kirim ulang";
+    msgChat.value = history[index].content;
+    updateSendButton(msgChat, sendChat);
+    autoResize(msgChat);
     cancelBtn.style.display = "";
     editNotice.style.display = "";
-    $("composer-label").textContent = "Edit pesan";
-    msgInput.focus();
+    msgChat.focus();
     hideError();
 }
 
 function cancelEdit() {
     exitEditMode();
-    msgInput.value = "";
+    msgChat.value = "";
+    updateSendButton(msgChat, sendChat);
+    autoResize(msgChat);
     hideError();
 }
 
 function exitEditMode() {
     editIndex = null;
-    sendLabel.textContent = "Kirim";
     cancelBtn.style.display = "none";
     editNotice.style.display = "none";
-    $("composer-label").textContent = "Pesan";
 }
 
 function newChat() {
@@ -602,24 +763,38 @@ function newChat() {
     history = [];
     editIndex = null;
     isLoading = false;
-    sendBtn.disabled = false;
-    msgInput.readOnly = false;
-    msgInput.value = "";
+    sendLanding.disabled = false;
+    sendChat.disabled = false;
+    msgLanding.readOnly = false;
+    msgChat.readOnly = false;
+    msgLanding.value = "";
+    msgChat.value = "";
     exitEditMode();
     hideError();
     renderChat();
-    msgInput.focus();
+    msgLanding.focus();
 }
 
 // ============================================================
 //  EVENT LISTENERS
 // ============================================================
-msgInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey && !e.isComposing && e.keyCode !== 229) {
-        e.preventDefault();
-        if (!isLoading) handleSend();
-    }
-});
+function addEnterHandler(textarea) {
+    textarea.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey && !e.isComposing && e.keyCode !== 229) {
+            e.preventDefault();
+            if (!isLoading) {
+                if (textarea === msgLanding) {
+                    handleSendFromLanding();
+                } else {
+                    handleSend();
+                }
+            }
+        }
+    });
+}
+
+addEnterHandler(msgLanding);
+addEnterHandler(msgChat);
 
 // ============================================================
 //  INIT

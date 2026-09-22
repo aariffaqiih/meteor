@@ -376,7 +376,7 @@ def index():
 
 @app.get("/images/<filename>")
 def brand_image(filename):
-    if filename not in {"banner.png", "profile_picture.png"}:
+    if filename not in {"banner.png", "profile_picture.png", "new_banner.png", "new_profile_picture.png", "header.png"}:
         abort(404)
     return send_from_directory(Path(app.root_path) / "images", filename)
 

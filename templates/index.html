@@ -3,255 +3,316 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#050b12">
+    <meta name="theme-color" content="#000000">
     <title>Meteor</title>
-    <link rel="icon" type="image/png" href="/images/profile_picture.png">
+    <link rel="icon" type="image/png" href="/images/new_profile_picture.png">
     <style nonce="{{ g.script_nonce }}">
         :root {
             color-scheme: dark;
-            --background: #050b12;
-            --surface: #0a1520;
-            --line: #1b3041;
-            --text: #eaf3f9;
-            --muted: #94aabd;
-            --cyan: #74d6ff;
+            --background: #000000;
+            --text: #e8ecee;
+            --muted: #8a9199;
+            --user-bubble: #1a2740;
+            --user-bubble-border: #293d5a;
+            --input-bg: #1a1d20;
+            --input-border: #2a2d32;
+            --send-bg: #3a3d42;
+            --send-active: #1a3a6a;
         }
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            margin: 0;
-            background: radial-gradient(ellipse at 50% 5%, #0b2031 0, var(--background) 60%);
+            background: var(--background);
             color: var(--text);
             font-family: "Segoe UI", Arial, sans-serif;
             font-size: 15px;
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         button, textarea { font: inherit; }
         button, a, textarea { -webkit-tap-highlight-color: transparent; }
         button, a { touch-action: manipulation; }
         a { color: inherit; text-decoration: none; }
-        button { cursor: pointer; }
+        button { cursor: pointer; border: 0; background: transparent; }
         button:disabled { cursor: wait; opacity: .55; }
         a:focus-visible, button:focus-visible, textarea:focus-visible {
-            outline: 2px solid var(--cyan);
-            outline-offset: 4px;
+            outline: 2px solid #4a8ab5;
+            outline-offset: 3px;
         }
-        .topbar { border-bottom: 1px solid #152533; background: #050b12d9; }
-        .topbar-inner {
-            max-width: 1160px;
-            min-height: 80px;
-            margin: auto;
-            padding: 16px 32px;
+
+        /* ============ LANDING VIEW ============ */
+        .landing {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            gap: 20px;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0 20px;
         }
-        .brand { display: inline-flex; align-items: center; gap: 11px; }
-        .brand-avatar { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #256183; }
-        .brand-name { font-size: 21px; font-weight: 600; letter-spacing: -.6px; }
-        .version {
-            margin-left: 2px;
-            padding: 1px 7px;
-            border: 1px solid #24394a;
-            border-radius: 5px;
-            color: var(--muted);
-            font-size: 10px;
-            letter-spacing: .5px;
+        .landing-banner {
+            max-width: 820px;
+            width: 100%;
+            margin-bottom: 32px;
         }
-        .new-chat {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            padding: 9px 14px;
-            border: 1px solid #294151;
-            border-radius: 9px;
-            color: #c7dbe8;
-            font-size: 12px;
-        }
-        .new-chat:hover { border-color: #5795b8; background: #0c1c29; }
-        .new-chat svg { width: 14px; height: 14px; color: var(--cyan); }
-        main { max-width: 1120px; margin: auto; padding: 28px 32px 32px; }
-        .banner {
-            height: clamp(220px, 32vh, 350px);
-            overflow: hidden;
-            border: 1px solid #1b374c;
-            border-radius: 18px;
-            background: #030a12;
-            box-shadow: 0 16px 64px #0005;
-        }
-        .banner img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 80%; }
-        .banner--compact { height: 150px; }
-        .banner--compact img { object-position: center 34%; }
-        .welcome { text-align: center; padding: 29px 0 25px; }
-        .eyebrow { margin: 0 0 8px; color: var(--cyan); font-size: 10px; font-weight: 600; letter-spacing: 2px; }
-        h1 { margin: 0; font-size: clamp(23px, 2.8vw, 32px); line-height: 1.3; font-weight: 500; letter-spacing: -.8px; }
-        .welcome-copy { margin: 9px 0 0; color: var(--muted); font-size: 13px; }
-        .conversation { max-width: 900px; margin: auto; padding: 29px 0 8px; }
-        .chat-message { display: flex; align-items: flex-start; gap: 12px; margin: 0 0 25px; }
-        .message-avatar { width: 33px; height: 33px; border: 1px solid #26536d; border-radius: 50%; flex: 0 0 auto; }
-        .message-main { max-width: calc(100% - 45px); min-width: 0; }
-        .message-heading { display: flex; align-items: center; gap: 12px; margin: 0 0 7px; min-height: 25px; }
-        .message-heading strong { font-size: 12px; font-weight: 600; color: #bed1e0; }
-        .message-content { overflow-wrap: anywhere; line-height: 1.8; }
-        .chat-message--user { justify-content: flex-end; }
-        .chat-message--user .message-main { max-width: 82%; }
-        .chat-message--user .message-heading { justify-content: flex-end; }
-        .chat-message--user .message-content {
-            padding: 12px 17px;
-            background: #10283a;
-            border: 1px solid #203f56;
-            border-radius: 15px 3px 15px 15px;
-            color: #e0eff8;
-        }
-        .edit-button { padding: 2px 7px; background: transparent; border: 0; border-radius: 4px; color: var(--muted); font-size: 11px; }
-        .edit-button:hover { color: var(--cyan); background: #112638; }
-        .composer-wrap { max-width: 900px; margin: auto; }
-        .composer {
-            padding: 17px 20px 13px;
-            border: 1px solid #29485f;
-            border-radius: 17px;
-            background: linear-gradient(120deg, #0e1c29, #0a1520);
-            box-shadow: 0 8px 40px #0003;
-        }
-        .composer:focus-within { border-color: #5b9ebf; box-shadow: 0 0 0 3px #3baeff0a; }
-        .composer-label { display: block; color: #b7cddb; font-size: 12px; }
-        textarea {
+        .landing-banner img {
             display: block;
             width: 100%;
-            min-height: 79px;
-            max-height: 260px;
-            padding: 9px 0;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        /* ============ CHAT VIEW ============ */
+        .chat-view {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .chat-header {
+            position: relative;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .chat-header img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .chat-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, var(--background));
+        }
+
+        /* Messages */
+        .chat-messages {
+            flex: 1;
+            padding: 20px 20px 10px;
+        }
+        .chat-messages-inner {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* User message */
+        .msg-user {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 24px;
+        }
+        .msg-user-bubble {
+            max-width: min(80%, 600px);
+            padding: 12px 20px;
+            background: var(--user-bubble);
+            border: 1px solid var(--user-bubble-border);
+            border-radius: 20px;
+            color: #d4dce4;
+            line-height: 1.65;
+            overflow-wrap: anywhere;
+        }
+
+        /* Assistant message */
+        .msg-assistant {
+            margin-bottom: 24px;
+            padding: 0;
+        }
+        .msg-assistant-content {
+            max-width: 820px;
+            color: #d0d6db;
+            line-height: 1.76;
+            overflow-wrap: anywhere;
+        }
+
+        /* ============ INPUT BAR ============ */
+        .input-bar {
+            max-width: 820px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+        .input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 6px 6px 20px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 50px;
+        }
+        .input-wrap:focus-within {
+            border-color: #3a5570;
+        }
+        .input-wrap textarea {
+            flex: 1;
+            display: block;
+            width: 100%;
+            min-height: 24px;
+            max-height: 120px;
+            padding: 8px 0;
             border: 0;
-            border-radius: 3px;
-            resize: vertical;
+            resize: none;
             background: transparent;
             color: var(--text);
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.5;
         }
-        textarea::placeholder { color: #758e9f; }
-        textarea:focus-visible { outline: none; }
-        .composer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 10px; border-top: 1px solid #1d3040; }
-        .keyboard-hint { color: var(--muted); font-size: 11px; }
-        .actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
-        .send-button {
-            display: inline-flex;
+        .input-wrap textarea::placeholder { color: #5a5f66; }
+        .input-wrap textarea:focus-visible { outline: none; }
+        .send-btn {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--send-bg);
+            color: #999;
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            min-height: 39px;
-            padding: 8px 17px;
-            border: 1px solid #8be0ff;
-            border-radius: 10px;
-            background: var(--cyan);
-            color: #062033;
-            font-size: 12px;
-            font-weight: 650;
+            transition: background .15s, color .15s, transform .1s;
         }
-        .send-button:hover:not(:disabled) { background: #a0e4ff; }
-        .send-button svg { width: 16px; height: 16px; }
-        .cancel-button { padding: 8px 10px; border: 0; border-radius: 8px; background: transparent; color: #b7cddb; font-size: 12px; }
-        .cancel-button:hover { background: #152c3d; }
-        .edit-notice { margin: 0 0 13px; padding: 11px 15px; border-left: 2px solid var(--cyan); border-radius: 0 7px 7px 0; background: #102536; color: #c3deed; font-size: 12px; }
-        .error { padding: 13px 16px; margin: 0 0 15px; border: 1px solid #744a4e; border-radius: 10px; background: #291b24; color: #f3c7c8; font-size: 13px; }
+        .send-btn:active:not(:disabled) { transform: scale(0.94); }
+        .send-btn svg { width: 18px; height: 18px; }
+
+        /* Landing input */
+        .landing .input-bar {
+            max-width: 820px;
+        }
+
+        /* Chat input */
+        .chat-input-area {
+            flex-shrink: 0;
+            padding: 12px 20px 20px;
+        }
+
+        /* Edit / Error */
+        .edit-notice {
+            max-width: 820px;
+            margin: 0 auto 10px;
+            padding: 10px 16px;
+            border-left: 2px solid #4a8ab5;
+            border-radius: 0 8px 8px 0;
+            background: rgba(74, 138, 181, 0.08);
+            color: #b0cede;
+            font-size: 13px;
+        }
+        .error {
+            max-width: 820px;
+            margin: 0 auto 10px;
+            padding: 12px 16px;
+            border: 1px solid #714e54;
+            border-radius: 12px;
+            background: #1a1114;
+            color: #f0c8cd;
+            font-size: 13px;
+        }
+        .edit-button {
+            padding: 2px 8px;
+            color: #718892;
+            font-size: 11px;
+            border-radius: 4px;
+        }
+        .edit-button:hover { color: #a0c8d8; }
+        .cancel-button {
+            padding: 6px 12px;
+            color: #8a9199;
+            font-size: 13px;
+            border-radius: 8px;
+        }
+        .cancel-button:hover { color: var(--text); }
+
         .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
         @media (max-width: 640px) {
-            .topbar-inner { min-height: 70px; padding: 13px 18px; gap: 10px; }
-            .brand { gap: 8px; }
-            .brand-avatar { width: 31px; height: 31px; }
-            .brand-name { font-size: 19px; }
-            .version { display: none; }
-            .new-chat { padding: 8px 10px; font-size: 11px; gap: 6px; }
-            main { padding: 20px 16px 24px; }
-            .banner { height: auto; aspect-ratio: 49 / 18; border-radius: 12px; }
-            .banner img { height: auto; }
-            .banner--compact { height: 100px; aspect-ratio: auto; }
-            .banner--compact img { height: 100%; }
-            .welcome { padding: 30px 6px 27px; }
-            .welcome-copy { max-width: 270px; margin: 11px auto 0; line-height: 1.7; }
-            .composer { padding: 15px 15px 12px; border-radius: 14px; }
-            textarea { font-size: 16px; min-height: 105px; }
-            .composer-bottom { flex-wrap: wrap; gap: 13px; }
-            .keyboard-hint { font-size: 10px; }
-            .actions { margin-left: auto; }
-            .chat-message--user .message-main { max-width: 90%; }
-            .conversation { padding-top: 24px; }
-            .message-content { font-size: 14px; }
+            .landing { padding: 0 16px; }
+            .landing-banner { margin-bottom: 24px; }
+            .input-wrap { padding: 4px 4px 4px 16px; }
+            .input-wrap textarea { font-size: 16px; }
+            .chat-messages { padding: 16px 16px 8px; }
+            .chat-input-area { padding: 10px 16px 16px; }
+            .msg-user-bubble { max-width: 90%; font-size: 14px; }
+            .msg-assistant-content { font-size: 14px; }
+            .send-btn { width: 36px; height: 36px; }
         }
     </style>
 </head>
 <body>
-    <header class="topbar">
-        <div class="topbar-inner">
-            <a class="brand" href="/" aria-label="Meteor, halaman utama">
-                <img class="brand-avatar" src="/images/profile_picture.png" alt="" width="38" height="38">
-                <span class="brand-name">Meteor</span><span class="version">1.0</span>
-            </a>
-            <a class="new-chat" href="/">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3v14M3 10h14"/></svg>
-                Percakapan baru
-            </a>
+{% if not history %}
+    <!-- ============ LANDING ============ -->
+    <div class="landing">
+        <div class="landing-banner">
+            <img src="/images/new_banner.png" alt="Meteor 1.0" width="1960" height="720" fetchpriority="high">
         </div>
-    </header>
-    <main>
-    <div class="banner{{ ' banner--compact' if history else '' }}">
-        <img src="/images/banner.png" alt="Meteor 1.0, meteor bercahaya biru melintas di atas Bumi" width="1960" height="720" fetchpriority="high">
-    </div>
-    <form id="chat-form" method="post" action="/" enctype="multipart/form-data">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <input type="hidden" name="history" value="{{ history|tojson|forceescape }}">
-        <input type="hidden" name="history_signature" value="{{ sign_history(history, session.csrf_token) }}">
-        <input type="hidden" name="edit_index" value="{{ edit_index if edit_index is not none else '' }}">
-        {% if not history %}
-        <section class="welcome">
-            <p class="eyebrow">HALO, AKU METEOR</p>
-            <h1>Apa yang ingin kamu jelajahi?</h1>
-            <p class="welcome-copy">Mulai dari pertanyaan kecil, ide besar, atau sekadar cerita.</p>
-        </section>
-        {% else %}
-        <section class="conversation" aria-label="Percakapan">
-            <h1 class="visually-hidden">Percakapan dengan Meteor</h1>
-            {% for item in history %}
-            <article class="chat-message{{ ' chat-message--user' if item.role == 'user' else '' }}">
-                {% if item.role == 'assistant' %}<img class="message-avatar" src="/images/profile_picture.png" alt="" width="33" height="33">{% endif %}
-                <div class="message-main">
-                    <div class="message-heading">
-                        <strong>{{ 'Kamu' if item.role == 'user' else 'Meteor' }}</strong>
-                        {% if item.role == 'user' %}
-                        <button class="edit-button" type="submit" name="edit" value="{{ loop.index0 }}" formnovalidate aria-label="Edit pesan {{ loop.index0 // 2 + 1 }}">Edit</button>
-                        {% endif %}
-                    </div>
-                    <div class="message-content">{% for line in item.content.split('\n') %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
-                </div>
-            </article>
-            {% endfor %}
-        </section>
-        {% endif %}
-        <div class="composer-wrap">
-        {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
-        {% if edit_index is not none %}
-        <p class="edit-notice">Menyimpan edit akan membuat jawaban baru dan menghapus pesan setelahnya.</p>
-        {% endif %}
-        <div class="composer">
-            <label class="composer-label" for="message">{{ 'Edit pesan' if edit_index is not none else 'Pesan' }}</label>
-            <textarea id="message" name="message" rows="3" cols="30" placeholder="Tulis pesanmu di sini…" aria-describedby="keyboard-hint" required autofocus>{{ message }}</textarea>
-            <div class="composer-bottom">
-                <small class="keyboard-hint" id="keyboard-hint">Enter untuk kirim. Shift+Enter untuk baris baru.</small>
-                <div class="actions">
-                    {% if edit_index is not none %}
-                    <button class="cancel-button" type="submit" name="cancel" value="1" formnovalidate>Batal</button>
-                    {% endif %}
-                    <button class="send-button" id="send" type="submit">
-                        {{ 'Simpan dan kirim ulang' if edit_index is not none else 'Kirim' }}
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 16V4m-5 5 5-5 5 5"/></svg>
+        <form id="chat-form" method="post" action="/" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <input type="hidden" name="history" value="{{ history|tojson|forceescape }}">
+            <input type="hidden" name="history_signature" value="{{ sign_history(history, session.csrf_token) }}">
+            <input type="hidden" name="edit_index" value="">
+            <div class="input-bar">
+                <div class="input-wrap">
+                    <textarea id="message" name="message" rows="1" placeholder="Ask anything" aria-label="Ask anything" required autofocus>{{ message }}</textarea>
+                    <button class="send-btn" id="send" type="submit" aria-label="Kirim">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
                     </button>
                 </div>
             </div>
+            {% if error %}<p class="error" role="alert" style="text-align:center; margin-top:16px;">{{ error }}</p>{% endif %}
+        </form>
+    </div>
+{% else %}
+    <!-- ============ CHAT VIEW ============ -->
+    <div class="chat-view">
+        <div class="chat-header">
+            <img src="/images/header.png" alt="Meteor 1.0" width="1960" height="140">
         </div>
+        <div class="chat-messages">
+            <div class="chat-messages-inner">
+                <h1 class="visually-hidden">Percakapan dengan Meteor</h1>
+                {% for item in history %}
+                {% if item.role == 'user' %}
+                <div class="msg-user">
+                    <div class="msg-user-bubble">
+                        {% for line in item.content.split('\n') %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}
+                        <button class="edit-button" type="submit" form="chat-form" name="edit" value="{{ loop.index0 }}" formnovalidate aria-label="Edit pesan {{ loop.index0 // 2 + 1 }}">Edit</button>
+                    </div>
+                </div>
+                {% else %}
+                <div class="msg-assistant">
+                    <div class="msg-assistant-content">{% for line in item.content.split('\n') %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
-    </form>
-    </main>
+        <div class="chat-input-area">
+            {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+            {% if edit_index is not none %}
+            <p class="edit-notice">Menyimpan edit akan membuat jawaban baru dan menghapus pesan setelahnya.</p>
+            {% endif %}
+            <form id="chat-form" method="post" action="/" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                <input type="hidden" name="history" value="{{ history|tojson|forceescape }}">
+                <input type="hidden" name="history_signature" value="{{ sign_history(history, session.csrf_token) }}">
+                <input type="hidden" name="edit_index" value="{{ edit_index if edit_index is not none else '' }}">
+                <div class="input-bar">
+                    <div class="input-wrap">
+                        <textarea id="message" name="message" rows="1" placeholder="Ask anything" aria-label="Ask anything" required autofocus>{{ message }}</textarea>
+                        {% if edit_index is not none %}
+                        <button class="cancel-button" type="submit" name="cancel" value="1" formnovalidate>Batal</button>
+                        {% endif %}
+                        <button class="send-btn" id="send" type="submit" aria-label="{{ 'Simpan dan kirim ulang' if edit_index is not none else 'Kirim' }}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endif %}
     <script nonce="{{ g.script_nonce }}">
         const form = document.getElementById("chat-form");
         const message = document.getElementById("message");
@@ -269,6 +330,14 @@
         };
         message.addEventListener("input", validateMessage);
         validateMessage();
+
+        // Auto-resize textarea
+        function autoResize() {
+            message.style.height = "auto";
+            message.style.height = Math.min(message.scrollHeight, 120) + "px";
+        }
+        message.addEventListener("input", autoResize);
+        autoResize();
 
         message.addEventListener("keydown", (event) => {
             if (event.key === "Enter" && !event.shiftKey && !event.isComposing && event.keyCode !== 229) {
