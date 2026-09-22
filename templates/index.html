@@ -13,15 +13,17 @@
     <style nonce="{{ g.script_nonce }}">
         :root {
             color-scheme: dark;
-            --background: #000000;
-            --text: #F4F4F4;
-            --muted: #AEAEAE;
-            --user-bubble: #061B3D;
-            --input-bg: #212121;
-            --send-inactive: #414141;
-            --send-inactive-icon: #212121;
-            --send-active: #061B3D;
-            --send-active-icon: #F4F4F4;
+            --background: #050505;
+            --text: #EDEDED;
+            --muted: #A1A1AA;
+            --user-bubble: #111111;
+            --user-bubble-border: #222222;
+            --input-bg: rgba(255, 255, 255, 0.03);
+            --input-border: rgba(255, 255, 255, 0.08);
+            --send-inactive: rgba(255, 255, 255, 0.05);
+            --send-inactive-icon: #555555;
+            --send-active: #EDEDED;
+            --send-active-icon: #050505;
             --max-width: 1080px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,10 +33,13 @@
             font-family: "Google Sans", sans-serif;
             font-optical-sizing: auto;
             font-variation-settings: "GRAD" 0;
-            font-size: 15px;
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         button, textarea { font: inherit; }
         button, a, textarea { -webkit-tap-highlight-color: transparent; }
@@ -118,10 +123,12 @@
             max-width: min(80%, 800px);
             padding: 20px 32px;
             background: var(--user-bubble);
+            border: 1px solid var(--user-bubble-border);
             border-radius: 20px;
             color: var(--text);
-            line-height: 1.65;
+            line-height: 1.7;
             overflow-wrap: anywhere;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* Assistant message */
@@ -146,11 +153,20 @@
         .input-wrap {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             padding: 13px 13px 13px 36px;
             background: var(--input-bg);
+            border: 1px solid var(--input-border);
             border-radius: 40px; /* rounded pill */
             min-height: 80px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-wrap:focus-within {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
         .input-wrap textarea {
             flex: 1;
@@ -165,6 +181,7 @@
             color: var(--text);
             font-size: 24px;
             line-height: 1.5;
+            letter-spacing: -0.02em;
         }
         .input-wrap textarea::placeholder { color: var(--muted); }
         .input-wrap textarea:focus-visible { outline: none; }
@@ -178,13 +195,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background .15s, color .15s, transform .1s;
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: 1px solid transparent;
         }
         .send-btn.active {
             background: var(--send-active);
             color: var(--send-active-icon);
+            box-shadow: 0 4px 16px rgba(237, 237, 237, 0.2);
         }
-        .send-btn:active:not(:disabled) { transform: scale(0.94); }
+        .send-btn:active:not(:disabled) { transform: scale(0.92); }
         .send-btn svg { width: 24px; height: 24px; }
 
         /* Landing input */
