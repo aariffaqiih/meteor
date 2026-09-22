@@ -351,6 +351,12 @@ def serve_js(filename):
         abort(404)
     return send_from_directory(Path(app.root_path) / "js", filename)
 
+@app.get("/css/<filename>")
+def serve_css(filename):
+    if not filename.endswith(".css") or "/" in filename or "\\" in filename:
+        abort(404)
+    return send_from_directory(Path(app.root_path) / "css", filename)
+
 
 @app.errorhandler(Exception)
 def unexpected_error(error):
@@ -376,7 +382,8 @@ def no_cache(response):
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Content-Security-Policy"] = (
         f"default-src 'none'; script-src 'nonce-{g.script_nonce}' https://cdn.jsdelivr.net; "
-        f"style-src 'nonce-{g.script_nonce}' https://cdn.jsdelivr.net; font-src https://cdn.jsdelivr.net; img-src 'self'; "
+        f"style-src 'self' 'nonce-{g.script_nonce}' https://cdn.jsdelivr.net https://fonts.googleapis.com; "
+        f"font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self'; "
         "form-action 'self'; frame-ancestors 'none'; base-uri 'none'"
     )
     return response
