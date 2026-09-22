@@ -253,6 +253,19 @@
         .landing .input-bar {
             max-width: var(--max-width);
         }
+        .landing-tagline {
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .disclaimer-text {
+            color: #555555;
+            font-size: 11px;
+            text-align: center;
+            margin-top: 12px;
+            padding: 0 16px;
+        }
 
         /* Chat input positioning */
         .chat-input-area {
@@ -473,6 +486,7 @@
         <div class="landing-banner">
             <img src="images/new_banner.png" alt="Meteor 1.0" width="1960" height="720" fetchpriority="high">
         </div>
+        <p class="landing-tagline">Simple. Free. No login. That's Meteor.</p>
         <div class="input-bar">
             <div class="input-wrap">
                 <textarea id="message-landing" rows="1" placeholder="Ask anything" aria-label="Ask anything" autofocus></textarea>
@@ -480,6 +494,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
                 </button>
             </div>
+            <p class="disclaimer-text">Meteor adalah AI dan bisa membuat kesalahan. Harap periksa kembali responsnya.</p>
         </div>
         <div id="no-keys-notice" class="config-notice" style="display:none">
             ⚠️ Belum ada API key. Buka file <code>config.js</code>, lalu isi
@@ -508,6 +523,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
                     </button>
                 </div>
+                <p class="disclaimer-text">Meteor adalah AI dan bisa membuat kesalahan. Harap periksa kembali responsnya.</p>
             </div>
         </div>
     </div>
