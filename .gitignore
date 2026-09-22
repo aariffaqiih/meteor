@@ -3,3 +3,15 @@
 __pycache__/
 *.pyc
 *.log
+
+# Audit and benchmark artifacts
+audit/
+AUDIT.md
+
+# Local test suites
+test_*.py
+test_frontend.cjs
+
+# Legacy brand assets (kept locally only)
+images/banner.png
+images/profile_picture.png

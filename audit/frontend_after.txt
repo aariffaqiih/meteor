@@ -1,1 +1,0 @@
-10 frontend checks passed (Unicode and whitespace boundaries, Enter, Shift+Enter, IME, duplicate submit, back navigation).
