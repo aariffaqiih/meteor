@@ -15,3 +15,7 @@ test_frontend.cjs
 # Legacy brand assets (kept locally only)
 images/banner.png
 images/profile_picture.png
+
+# Local documentation & examples (kept locally only)
+README.md
+.env.example
