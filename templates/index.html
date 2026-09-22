@@ -620,11 +620,11 @@
             });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <script nonce="{{ g.script_nonce }}" src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script nonce="{{ g.script_nonce }}" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script src="/js/math-extension.js"></script>
+    <script nonce="{{ g.script_nonce }}" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script nonce="{{ g.script_nonce }}" src="/js/math-extension.js"></script>
     <script nonce="{{ g.script_nonce }}">
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll('.msg-assistant').forEach(msg => {
@@ -632,7 +632,8 @@
                 const renderedDiv = msg.querySelector('.rendered-markdown');
                 if (rawContentDiv && renderedDiv) {
                     const raw = rawContentDiv.textContent;
-                    renderedDiv.innerHTML = marked.parse(raw);
+                    const normalized = typeof normalizeMath === "function" ? normalizeMath(raw) : raw;
+                    renderedDiv.innerHTML = marked.parse(normalized);
                     renderedDiv.querySelectorAll('pre code').forEach((block) => {
                         hljs.highlightElement(block);
                     });

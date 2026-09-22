@@ -58,6 +58,10 @@ SYSTEM_MESSAGE = {
         "Untuk pertanyaan yang memerlukan perhitungan, matematika, sains, logika, atau pemrograman, "
         "selalu jabarkan langkah-langkah penalaran, penurunan rumus, atau analisis secara terstruktur, "
         "sistematis, dan komprehensif sebelum memberikan solusi akhir agar jawaban akurat dan mudah dipahami. "
+        "Untuk semua rumus matematika, kalkulus, dan simbol sains, SELALU gunakan format LaTeX standar: "
+        "gunakan tanda dolar ganda '$$...$$' pada baris baru terpisah untuk rumus blok/display, "
+        "dan tanda dolar tunggal '$...$' untuk rumus inline di dalam kalimat (misalnya '$x^n$', '$\\frac{d}{dx}$', atau '$f(x)$'). "
+        "Jangan gunakan kurung siku '[ ]' atau kurung biasa '( )' tanpa tanda dolar untuk membungkus rumus matematika. "
         "Jika permintaan tidak aman atau berisiko tinggi, jangan hanya menolak. Jelaskan secara singkat bahwa "
         "kamu tidak bisa membantu karena informasi itu dapat memudahkan bahaya nyata, lalu tawarkan arah aman yang relevan, "
         "misalnya konteks sejarah, dampak kemanusiaan, pencegahan, keselamatan, atau bantuan darurat. Jangan memberi langkah, "
@@ -413,8 +417,8 @@ def no_cache(response):
     response.headers["Cache-Control"] = "no-store"
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Content-Security-Policy"] = (
-        f"default-src 'none'; script-src 'nonce-{g.script_nonce}'; "
-        f"style-src 'nonce-{g.script_nonce}'; img-src 'self'; "
+        f"default-src 'none'; script-src 'nonce-{g.script_nonce}' https://cdn.jsdelivr.net; "
+        f"style-src 'nonce-{g.script_nonce}' https://cdn.jsdelivr.net; font-src https://cdn.jsdelivr.net; img-src 'self'; "
         "form-action 'self'; frame-ancestors 'none'; base-uri 'none'"
     )
     return response

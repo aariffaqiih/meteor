@@ -7,6 +7,7 @@
     <title>Meteor</title>
     <link rel="icon" type="image/png" href="images/new_profile_picture.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <style>
         :root {
             color-scheme: dark;
@@ -479,7 +480,6 @@
 
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script src="js/math-extension.js"></script>
 <script src="config.js"></script>
@@ -560,6 +560,10 @@ const SYSTEM_MESSAGE = {
         "Untuk pertanyaan yang memerlukan perhitungan, matematika, sains, logika, atau pemrograman, " +
         "selalu jabarkan langkah-langkah penalaran, penurunan rumus, atau analisis secara terstruktur, " +
         "sistematis, dan komprehensif sebelum memberikan solusi akhir agar jawaban akurat dan mudah dipahami. " +
+        "Untuk semua rumus matematika, kalkulus, dan simbol sains, SELALU gunakan format LaTeX standar: " +
+        "gunakan tanda dolar ganda '$$...$$' pada baris baru terpisah untuk rumus blok/display, " +
+        "dan tanda dolar tunggal '$...$' untuk rumus inline di dalam kalimat (misalnya '$x^n$', '$\\frac{d}{dx}$', atau '$f(x)$'). " +
+        "Jangan gunakan kurung siku '[ ]' atau kurung biasa '( )' tanpa tanda dolar untuk membungkus rumus matematika. " +
         "Jika permintaan tidak aman atau berisiko tinggi, jangan hanya menolak. Jelaskan secara singkat bahwa " +
         "kamu tidak bisa membantu karena informasi itu dapat memudahkan bahaya nyata, lalu tawarkan arah aman yang relevan, " +
         "misalnya konteks sejarah, dampak kemanusiaan, pencegahan, keselamatan, atau bantuan darurat. Jangan memberi langkah, " +
@@ -782,7 +786,8 @@ function escapeHTML(text) {
 
 function formatContent(text, isMarkdown = false) {
     if (isMarkdown) {
-        return marked.parse(text);
+        const normalized = typeof normalizeMath === "function" ? normalizeMath(text) : text;
+        return marked.parse(normalized);
     }
     return escapeHTML(text).replace(/\n/g, "<br>");
 }
