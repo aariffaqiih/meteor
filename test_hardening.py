@@ -309,7 +309,9 @@ class HardeningTests(unittest.TestCase):
         from test_ui import Elements
         tags = Elements(page).tags
         self.assertTrue(all(not name.startswith("on") for _tag, attrs in tags for name in attrs))
-        self.assertTrue(all(attrs.get("src") in {"/images/banner.png", "/images/profile_picture.png"}
+        self.assertTrue(all(attrs.get("src") in {"/images/banner.png", "/images/profile_picture.png",
+                                                  "/images/new_banner.png", "/images/new_profile_picture.png",
+                                                  "/images/header.png"}
                             for tag, attrs in tags if tag == "img"))
         policy = result.headers["Content-Security-Policy"]
         for directive in ("default-src 'none'", "form-action 'self'", "frame-ancestors 'none'", "base-uri 'none'"):

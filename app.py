@@ -54,7 +54,10 @@ SYSTEM_MESSAGE = {
         "'Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.' "
         "Meteor adalah nama asisten dalam aplikasi, bukan klaim bahwa modelnya dilatih sendiri. "
         "Jangan mengarang siapa pembuat atau pelatihmu. "
-        "Jawab dengan jelas, santai, singkat, dan apa adanya dalam bahasa pengguna. "
+        "Jawab dengan jelas, santai, dan apa adanya dalam bahasa pengguna. "
+        "Untuk pertanyaan yang memerlukan perhitungan, matematika, sains, logika, atau pemrograman, "
+        "selalu jabarkan langkah-langkah penalaran, penurunan rumus, atau analisis secara terstruktur, "
+        "sistematis, dan komprehensif sebelum memberikan solusi akhir agar jawaban akurat dan mudah dipahami. "
         "Jika permintaan tidak aman atau berisiko tinggi, jangan hanya menolak. Jelaskan secara singkat bahwa "
         "kamu tidak bisa membantu karena informasi itu dapat memudahkan bahaya nyata, lalu tawarkan arah aman yang relevan, "
         "misalnya konteks sejarah, dampak kemanusiaan, pencegahan, keselamatan, atau bantuan darurat. Jangan memberi langkah, "
@@ -216,13 +219,13 @@ def call_providers(messages, deadline):
             continue
 
         url, model = PROVIDERS[account["provider"]]
-        payload = {"model": model, "messages": [SYSTEM_MESSAGE, *messages], "max_tokens": 1024}
+        payload = {"model": model, "messages": [SYSTEM_MESSAGE, *messages], "max_tokens": 3072}
         if account["provider"] == "openrouter":
             # Also cap provider prices at zero; never fall back to a paid model.
             payload["provider"] = {"max_price": {"prompt": 0, "completion": 0, "request": 0}}
         else:
             payload.pop("max_tokens")
-            payload.update(max_completion_tokens=2048, reasoning_effort="low", include_reasoning=False)
+            payload.update(max_completion_tokens=4096, reasoning_effort="medium", include_reasoning=False)
 
         status, headers = 503, {}
         response = None

@@ -39,7 +39,7 @@ class ThemeTests(unittest.TestCase):
         self.assertNotIn("unsafe-inline", policy)
         self.assertEqual([attrs["nonce"] for tag, attrs in elements if tag == "style"], [nonce])
         self.assertEqual({attrs["src"] for tag, attrs in elements if tag == "img"},
-                         {"/images/banner.png", "/images/profile_picture.png"})
+                         {"/images/new_banner.png", "/images/new_profile_picture.png"})
         self.assertNotEqual(policy, self.client.get("/").headers["Content-Security-Policy"])
         self.assertEqual(response.headers["Cache-Control"], "no-store")
 
