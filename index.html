@@ -156,6 +156,14 @@
         .msg-assistant {
             margin-bottom: 24px;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .msg-assistant-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
         }
         .msg-assistant-content {
             max-width: var(--max-width);
@@ -832,13 +840,16 @@ function renderChat() {
                 html += formatContent(item.content, false);
                 html += `</div>`;
                 html += `<div class="msg-user-actions">`;
-                html += `<button class="action-btn" onclick="copyUserText(${i})" aria-label="Copy pesan" title="Copy pesan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>`;
+                html += `<button class="action-btn" onclick="copyMessage(${i})" aria-label="Copy pesan" title="Copy pesan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>`;
                 html += `<button class="action-btn" onclick="startEdit(${i})" aria-label="Edit pesan" title="Edit pesan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>`;
                 html += `</div></div>`;
             } else {
                 html += `<div class="msg-assistant">`;
                 html += `<div class="msg-assistant-content" ${i === history.length - 1 ? 'id="streaming-target"' : ""}>`;
                 html += formatContent(item.content, true);
+                html += `</div>`;
+                html += `<div class="msg-assistant-actions">`;
+                html += `<button class="action-btn" onclick="copyMessage(${i})" aria-label="Copy respons" title="Copy respons"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>`;
                 html += `</div></div>`;
             }
         });
@@ -1015,7 +1026,7 @@ function newChat() {
     msgLanding.focus();
 }
 
-function copyUserText(index) {
+function copyMessage(index) {
     const text = history[index].content;
     navigator.clipboard.writeText(text);
 }
