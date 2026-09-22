@@ -9,18 +9,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css">
     <style>
         :root {
             color-scheme: dark;
             --background: #000000;
-            --text: #e8ecee;
-            --muted: #8a9199;
-            --user-bubble: #1a2740;
-            --user-bubble-border: #293d5a;
-            --input-bg: #1a1d20;
-            --input-border: #2a2d32;
-            --send-bg: #3a3d42;
-            --send-active: #1a3a6a;
+            --text: #F4F4F4;
+            --muted: #AEAEAE;
+            --user-bubble: #061B3D;
+            --input-bg: #212121;
+            --send-inactive: #414141;
+            --send-inactive-icon: #212121;
+            --send-active: #061B3D;
+            --send-active-icon: #F4F4F4;
+            --max-width: 1080px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -50,20 +52,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             padding: 0 20px;
         }
         .landing-banner {
-            max-width: 820px;
+            max-width: var(--max-width);
             width: 100%;
+            margin-top: 0; /* mepet pojok atas */
             margin-bottom: 32px;
         }
         .landing-banner img {
             display: block;
             width: 100%;
             height: auto;
-            border-radius: 12px;
         }
 
         /* ============ CHAT VIEW ============ */
@@ -78,10 +79,13 @@
             position: relative;
             flex-shrink: 0;
             overflow: hidden;
+            text-align: center;
         }
         .chat-header img {
             display: block;
             width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
             height: auto;
         }
         .chat-header::after {
@@ -101,7 +105,7 @@
             padding: 20px 20px 10px;
         }
         .chat-messages-inner {
-            max-width: 820px;
+            max-width: var(--max-width);
             margin: 0 auto;
         }
 
@@ -112,12 +116,11 @@
             margin-bottom: 24px;
         }
         .msg-user-bubble {
-            max-width: min(80%, 600px);
-            padding: 12px 20px;
+            max-width: min(80%, 800px);
+            padding: 20px 32px;
             background: var(--user-bubble);
-            border: 1px solid var(--user-bubble-border);
             border-radius: 20px;
-            color: #d4dce4;
+            color: var(--text);
             line-height: 1.65;
             overflow-wrap: anywhere;
         }
@@ -128,8 +131,8 @@
             padding: 0;
         }
         .msg-assistant-content {
-            max-width: 820px;
-            color: #d0d6db;
+            max-width: var(--max-width);
+            color: var(--text);
             line-height: 1.76;
             overflow-wrap: anywhere;
         }
@@ -143,7 +146,7 @@
 
         /* ============ INPUT BAR (shared) ============ */
         .input-bar {
-            max-width: 820px;
+            max-width: var(--max-width);
             width: 100%;
             margin: 0 auto;
             position: relative;
@@ -152,37 +155,34 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 6px 6px 6px 20px;
+            padding: 13px 13px 13px 36px;
             background: var(--input-bg);
-            border: 1px solid var(--input-border);
-            border-radius: 50px;
-        }
-        .input-wrap:focus-within {
-            border-color: #3a5570;
+            border-radius: 40px; /* rounded pill */
+            min-height: 80px;
         }
         .input-wrap textarea {
             flex: 1;
             display: block;
             width: 100%;
-            min-height: 24px;
+            min-height: 36px;
             max-height: 120px;
-            padding: 8px 0;
+            padding: 0;
             border: 0;
             resize: none;
             background: transparent;
             color: var(--text);
-            font-size: 15px;
+            font-size: 24px;
             line-height: 1.5;
         }
-        .input-wrap textarea::placeholder { color: #5a5f66; }
+        .input-wrap textarea::placeholder { color: var(--muted); }
         .input-wrap textarea:focus-visible { outline: none; }
         .send-btn {
             flex-shrink: 0;
-            width: 40px;
-            height: 40px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
-            background: var(--send-bg);
-            color: #999;
+            background: var(--send-inactive);
+            color: var(--send-inactive-icon);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -190,32 +190,31 @@
         }
         .send-btn.active {
             background: var(--send-active);
-            border: 1.5px solid #3a6aaa;
-            color: #c0d8f0;
+            color: var(--send-active-icon);
         }
         .send-btn:active:not(:disabled) { transform: scale(0.94); }
         .send-btn svg {
-            width: 18px;
-            height: 18px;
+            width: 24px;
+            height: 24px;
         }
 
         /* Landing input positioning */
         .landing .input-bar {
-            max-width: 820px;
+            max-width: var(--max-width);
         }
 
         /* Chat input positioning */
         .chat-input-area {
             flex-shrink: 0;
-            padding: 12px 20px 20px;
+            padding: 12px 20px 48px; /* box prompt bawah jarak 48px */
         }
         .chat-input-area .input-bar {
-            max-width: 820px;
+            max-width: var(--max-width);
         }
 
         /* Edit/Error notices */
         .edit-notice {
-            max-width: 820px;
+            max-width: var(--max-width);
             margin: 0 auto 10px;
             padding: 10px 16px;
             border-left: 2px solid #4a8ab5;
@@ -225,7 +224,7 @@
             font-size: 13px;
         }
         .error {
-            max-width: 820px;
+            max-width: var(--max-width);
             margin: 0 auto 10px;
             padding: 12px 16px;
             border: 1px solid #714e54;
@@ -250,7 +249,7 @@
         .cancel-button:hover { color: var(--text); }
 
         .config-notice {
-            max-width: 820px;
+            max-width: var(--max-width);
             margin: 20px auto;
             padding: 0 20px;
             color: #6a7480;
@@ -276,6 +275,144 @@
             .msg-user-bubble { max-width: 90%; font-size: 15px; }
             .msg-assistant-content { font-size: 15px; }
             .send-btn { width: 36px; height: 36px; }
+        }
+
+        /* ============ MARKDOWN RENDERING ============ */
+        .msg-assistant-content h1,
+        .msg-assistant-content h2,
+        .msg-assistant-content h3,
+        .msg-assistant-content h4 {
+            margin: 20px 0 8px;
+            color: var(--text);
+            line-height: 1.3;
+        }
+        .msg-assistant-content h1 { font-size: 1.3em; }
+        .msg-assistant-content h2 { font-size: 1.15em; }
+        .msg-assistant-content h3 { font-size: 1.05em; }
+        .msg-assistant-content h4 { font-size: 1em; }
+        .msg-assistant-content h1:first-child,
+        .msg-assistant-content h2:first-child,
+        .msg-assistant-content h3:first-child {
+            margin-top: 0;
+        }
+        .msg-assistant-content p {
+            margin: 0 0 12px;
+        }
+        .msg-assistant-content p:last-child {
+            margin-bottom: 0;
+        }
+        .msg-assistant-content ul,
+        .msg-assistant-content ol {
+            margin: 8px 0 12px;
+            padding-left: 24px;
+        }
+        .msg-assistant-content li {
+            margin-bottom: 4px;
+        }
+        .msg-assistant-content li > p {
+            margin: 0;
+        }
+        .msg-assistant-content code {
+            font-family: "Fira Code", "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+            font-size: 0.88em;
+        }
+        .msg-assistant-content :not(pre) > code {
+            padding: 2px 7px;
+            background: #1a1f26;
+            border: 1px solid #2a3040;
+            border-radius: 5px;
+            color: #c8d3de;
+        }
+        .msg-assistant-content pre {
+            margin: 12px 0;
+            padding: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #1a1e24;
+            border: 1px solid #2a3040;
+        }
+        .msg-assistant-content pre code {
+            display: block;
+            padding: 16px 18px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.6;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+        }
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 14px;
+            background: #14181e;
+            border-bottom: 1px solid #2a3040;
+            font-size: 11px;
+            color: #6a7a8a;
+            font-family: "Instrument Sans", sans-serif;
+        }
+        .code-header .copy-btn {
+            padding: 2px 10px;
+            font-size: 11px;
+            color: #6a7a8a;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color .15s;
+        }
+        .code-header .copy-btn:hover {
+            color: #b0c4d8;
+        }
+        .msg-assistant-content blockquote {
+            margin: 10px 0;
+            padding: 8px 16px;
+            border-left: 3px solid #2a4a6a;
+            background: rgba(42, 74, 106, 0.1);
+            border-radius: 0 6px 6px 0;
+            color: #a0b0c0;
+        }
+        .msg-assistant-content blockquote p {
+            margin: 0;
+        }
+        .msg-assistant-content hr {
+            margin: 16px 0;
+            border: none;
+            border-top: 1px solid #2a3040;
+        }
+        .msg-assistant-content table {
+            width: 100%;
+            margin: 12px 0;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .msg-assistant-content th,
+        .msg-assistant-content td {
+            padding: 8px 12px;
+            border: 1px solid #2a3040;
+            text-align: left;
+        }
+        .msg-assistant-content th {
+            background: #14181e;
+            font-weight: 600;
+            color: #b0c4d8;
+        }
+        .msg-assistant-content td {
+            background: #0e1218;
+        }
+        .msg-assistant-content strong { color: var(--text); }
+        .msg-assistant-content a {
+            color: #6aafe6;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .msg-assistant-content a:hover { color: #90c8f0; }
+
+        .msg-user-bubble code {
+            font-family: "Fira Code", "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.88em;
+            padding: 1px 5px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -324,8 +461,56 @@
         </div>
     </div>
 
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="config.js"></script>
 <script>
+// ============================================================
+//  MARKED.JS CONFIGURATION
+// ============================================================
+marked.setOptions({
+    breaks: true,
+    gfm: true,
+    highlight: function(code, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try { return hljs.highlight(code, { language: lang }).value; }
+            catch {}
+        }
+        try { return hljs.highlightAuto(code).value; }
+        catch {}
+        return code;
+    }
+});
+
+// Custom renderer for code blocks with language header + copy button
+const renderer = new marked.Renderer();
+renderer.code = function(obj) {
+    const code = obj.text || obj;
+    const lang = obj.lang || '';
+    let highlighted;
+    if (lang && hljs.getLanguage(lang)) {
+        try { highlighted = hljs.highlight(code, { language: lang }).value; }
+        catch { highlighted = escapeHTML(code); }
+    } else {
+        try { highlighted = hljs.highlightAuto(code).value; }
+        catch { highlighted = escapeHTML(code); }
+    }
+    const langLabel = lang || 'code';
+    return `<div class="code-header"><span>${escapeHTML(langLabel)}</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code class="hljs${lang ? ' language-' + escapeHTML(lang) : ''}">${highlighted}</code></pre>`;
+};
+marked.use({ renderer });
+
+function copyCode(btn) {
+    const pre = btn.closest('.code-header').nextElementSibling;
+    const code = pre?.querySelector('code');
+    if (code) {
+        navigator.clipboard.writeText(code.textContent).then(() => {
+            btn.textContent = 'Copied!';
+            setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+        });
+    }
+}
+
 // ============================================================
 //  KONFIGURASI — API key hanya dimuat dari config.js
 // ============================================================
@@ -573,7 +758,10 @@ function escapeHTML(text) {
     return div.innerHTML;
 }
 
-function formatContent(text) {
+function formatContent(text, isMarkdown = false) {
+    if (isMarkdown) {
+        return marked.parse(text);
+    }
     return escapeHTML(text).replace(/\n/g, "<br>");
 }
 
@@ -590,7 +778,7 @@ function renderChat() {
             if (isUser) {
                 html += `<div class="msg-user">`;
                 html += `<div class="msg-user-bubble">`;
-                html += formatContent(item.content);
+                html += formatContent(item.content, false);
                 if (!isLoading) {
                     html += ` <button class="edit-button" onclick="startEdit(${i})" aria-label="Edit pesan">Edit</button>`;
                 }
@@ -598,7 +786,7 @@ function renderChat() {
             } else {
                 html += `<div class="msg-assistant">`;
                 html += `<div class="msg-assistant-content" ${i === history.length - 1 ? 'id="streaming-target"' : ""}>`;
-                html += formatContent(item.content);
+                html += formatContent(item.content, true);
                 html += `</div></div>`;
             }
         });
@@ -621,7 +809,7 @@ function showTypingIndicator() {
 function updateStreamingMessage(text) {
     const target = $("streaming-target");
     if (target) {
-        target.innerHTML = formatContent(text);
+        target.innerHTML = formatContent(text, true);
         scrollToBottom();
     }
 }
