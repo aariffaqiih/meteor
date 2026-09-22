@@ -139,7 +139,7 @@ def protect_identity(answer):
 def load_keys():
     keys = []
     seen = set()
-    for number in range(1, 7):
+    for number in range(1, 21):
         key = os.getenv(f"API_KEY_{number}", "").strip().replace("\\_", "_")
         provider = "openrouter" if key.startswith("sk-or-") else "groq"
         if not key or key in seen or not key.startswith(("sk-or-", "gsk_")):
