@@ -380,6 +380,12 @@ def brand_image(filename):
         abort(404)
     return send_from_directory(Path(app.root_path) / "images", filename)
 
+@app.get("/js/<filename>")
+def serve_js(filename):
+    if not filename.endswith(".js") or "/" in filename or "\\" in filename:
+        abort(404)
+    return send_from_directory(Path(app.root_path) / "js", filename)
+
 
 @app.errorhandler(Exception)
 def unexpected_error(error):
