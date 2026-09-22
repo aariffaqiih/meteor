@@ -19,3 +19,7 @@ images/profile_picture.png
 # Local documentation & examples (kept locally only)
 README.md
 .env.example
+
+# Local backend templates & dependencies (kept locally only)
+templates/
+requirements.txt
