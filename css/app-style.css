@@ -47,7 +47,7 @@
             font-variation-settings: "GRAD" 0;
             font-size: clamp(15px, 1vw + 0.5rem, 18px);
             line-height: 1.6;
-            letter-spacing: -0.012em;
+
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
@@ -120,7 +120,7 @@
             align-items: center;
             gap: 10px;
             font-weight: 700;
-            letter-spacing: -0.04em;
+
             font-size: 18px;
         }
         .mark img {
@@ -157,7 +157,7 @@
         .landing-copy h1 {
             font-size: clamp(2.6rem, 6vw, 4.6rem);
             line-height: 1.05;
-            letter-spacing: -0.06em;
+
             font-weight: 700;
             padding-bottom: 6px;
         }
@@ -290,7 +290,7 @@
         .msg-assistant-content {
             overflow-wrap: anywhere;
             line-height: 1.8;
-            letter-spacing: -0.015em;
+
         }
         .typing-dots { display: inline-flex; gap: 6px; padding: 10px 0; }
         .typing-dots span {
