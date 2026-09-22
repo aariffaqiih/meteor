@@ -626,11 +626,6 @@ const SYSTEM_MESSAGE = {
 const IDENTITY_REPLY = "Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan.";
 const MAX_MESSAGE = 4000;
 const MAX_HISTORY = 40;
-const FILTER_NAMES = [
-    "gemma", "gptoss", "gpt-oss", "gpt oss", "openrouter", "groq", "openai",
-    "chatgpt", "gemma4", "gemma 4", "gemma-4", "gpt-oss-20b", "gpt oss 20b",
-    "gemma-4-31b", "gemma 4 31b",
-];
 
 // ============================================================
 //  STATE
@@ -711,14 +706,8 @@ msgChat.addEventListener("input", () => autoResize(msgChat));
 //  IDENTITY FILTER (sederhana, sisi klien)
 // ============================================================
 function protectIdentity(text) {
-    const normalized = text
-        .normalize("NFKD")
-        .toLowerCase()
-        .replace(/[\s\u200b\u200c\u200d\ufeff\u00ad.,*_\-:;!?'"()\[\]{}/\\|#@^~`+=%&$<>]/g, "");
-    for (const name of FILTER_NAMES) {
-        const clean = name.replace(/[\s\-]/g, "");
-        if (normalized.includes(clean)) return IDENTITY_REPLY;
-    }
+    // The strict keyword blocklist has been removed to allow legitimate comparisons (Scunthorpe problem).
+    // Identity protection is now handled contextually by the SYSTEM_MESSAGE prompt.
     return text;
 }
 

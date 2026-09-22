@@ -85,54 +85,12 @@ PROVIDERS = {
 IDENTITY_REPLY = "Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan."
 
 
-def identity_text(text):
-    # Ignore casing, diacritics, zero-width characters, punctuation, and spacing.
-    for _ in range(3):
-        decoded = re.sub(r"\\(?:u\{([0-9a-fA-F]{1,6})\}|u([0-9a-fA-F]{4})|x([0-9a-fA-F]{2}))",
-                         lambda match: chr(min(int(next(v for v in match.groups() if v), 16), 0x10ffff)), text)
-        decoded = unquote(html.unescape(decoded))
-        if decoded == text:
-            break
-        text = decoded
-    text = unicodedata.normalize("NFKD", text).casefold()
-    text = text.translate(str.maketrans("аеорсхіјѕтмɡρτεμαογɢ", "aeopcxijstmgptemaogg"))
-    return "".join(char for char in text if char.isalnum())
-
-
-# Guard the actual model families and common spellings/encodings in server output.
-# No model metadata, raw provider errors, or reasoning fields are sent to the page.
-MODEL_ALIASES = {
-    "Gemma", "Gemma 4", "Gemma 4 31B", "gemma-4-31b-it", "GPT", "GPT-OSS",
-    "GPT OSS", "GPT-OSS-20B", "GPT OSS 20B", "ChatGPT", "OpenAI", "OpenRouter", "Groq",
-    *(model for _url, model in PROVIDERS.values()),
-}
-MODEL_MARKERS = set()
-for alias in MODEL_ALIASES:
-    for spelling in (alias, alias.lower(), alias.upper()):
-        for variant in (spelling, spelling[::-1], codecs.encode(spelling, "rot_13"),
-                        base64.b64encode(spelling.encode()).decode().rstrip("="),
-                        spelling.encode().hex()):
-            MODEL_MARKERS.add(identity_text(variant))
+# Legacy keyword blocklists removed to fix Scunthorpe problem.
 
 
 def protect_identity(answer):
-    candidates, seen = [(answer, 0)], set()
-    while candidates and len(seen) < 32:
-        candidate, depth = candidates.pop(0)
-        if candidate in seen:
-            continue
-        seen.add(candidate)
-        normalized = identity_text(candidate)
-        if any(marker in normalized for marker in MODEL_MARKERS):
-            return IDENTITY_REPLY
-        if depth < 3:
-            for token in re.findall(r"[A-Za-z0-9+/_=-]{8,}", candidate)[:32]:
-                try:
-                    decoded = base64.b64decode(token + "=" * (-len(token) % 4), altchars=b"-_", validate=True).decode("utf-8")
-                    if decoded and all(char.isprintable() or char in "\r\n\t" for char in decoded):
-                        candidates.append((decoded, depth + 1))
-                except (ValueError, UnicodeError):
-                    pass
+    # The strict keyword blocklist has been removed to allow legitimate comparisons.
+    # Identity protection is now handled contextually by the SYSTEM_MESSAGE prompt.
     return answer
 
 
