@@ -182,17 +182,14 @@
             align-items: center;
             gap: 12px;
             padding: 13px 13px 13px 36px;
-            background: var(--input-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #000000;
+            border: 1px solid #212121;
             border-radius: 40px; /* rounded pill */
             min-height: 80px;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: border-color 0.3s ease;
         }
         .input-wrap:focus-within {
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 40px rgba(255, 255, 255, 0.03);
+            border-color: #333333;
         }
         .input-wrap textarea {
             flex: 1;
