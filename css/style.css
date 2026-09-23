@@ -211,11 +211,11 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 13px 13px 13px 36px;
+            padding: 10px 10px 10px 32px;
             background: #000000;
             border: 1px solid #212121 !important;
             border-radius: 40px; /* rounded pill */
-            min-height: 80px;
+
             transition: border-color 0.3s ease;
         }
         .input-wrap:focus-within {
@@ -231,7 +231,7 @@
             border: 0;
             resize: none;
             background: transparent;
-            color: var(--text);
+            color: #FFF;
             font-size: 16px;
             line-height: 1.5;
 
@@ -240,8 +240,8 @@
         .input-wrap textarea:focus-visible { outline: none; }
         .send-btn {
             flex-shrink: 0;
-            width: 54px;
-            height: 54px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: var(--send-inactive);
             color: var(--send-inactive-icon);
@@ -257,8 +257,8 @@
         }
         .send-btn:active:not(:disabled) { transform: scale(0.92); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .send-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
         }
 
         /* Landing input positioning */
@@ -266,16 +266,16 @@
             max-width: var(--max-width);
         }
         .landing-tagline {
-            color: var(--muted);
-            font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+            color: #FFF;
+            font-size: clamp(2.1rem, 2.5vw, 1.8rem);
             margin-bottom: 24px;
             text-align: center;
         }
         .disclaimer-text {
-            color: #555555;
-            font-size: 11px;
+            color: #666;
+            font-size: 14px;
             text-align: center;
-            margin-top: 12px;
+            margin-top: 16px;
             padding: 0 16px;
         }
 
