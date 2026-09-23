@@ -259,7 +259,7 @@ async function callAPI(messages) {
 
         const systemMessageWithTime = {
             role: "system",
-            content: SYSTEM_MESSAGE.content + "\n\nInformasi Real-Time Perangkat User:\nWaktu saat ini: " + new Date().toLocaleString("id-ID", { timeZoneName: "short" })
+            content: SYSTEM_MESSAGE.content + "\n\nInformasi Real-Time Perangkat User:\nWaktu saat ini: " + new Date().toLocaleString("id-ID", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZoneName: "short" })
         };
 
         const payload = {
