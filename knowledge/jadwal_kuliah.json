@@ -1,0 +1,47 @@
+{
+  "senin": [
+    {
+      "nama_mata_kuliah": "implementasi dan pengujian perangkat lunak",
+      "jam": "11:30:00 - 14:30:00",
+      "lokasi": "DC-201"
+    }
+  ],
+  "selasa": [
+    {
+      "nama_mata_kuliah": "manajemen projek tik",
+      "jam": "07:30:00 - 10:30:00",
+      "lokasi": "REK-402"
+    },
+    {
+      "nama_mata_kuliah": "komputasi awan dan terdistribusi",
+      "jam": "12:30:00 - 15:30:00",
+      "lokasi": "IOT-202"
+    }
+  ],
+  "rabu": [
+    {
+      "nama_mata_kuliah": "keamanan siber",
+      "jam": "12:30:00 - 15:30:00",
+      "lokasi": "REK-307"
+    }
+  ],
+  "kamis": [
+    {
+      "nama_mata_kuliah": "sosio-informatik dan keprofesian",
+      "jam": "13:30:00 - 15:30:00",
+      "lokasi": "REK-402"
+    },
+    {
+      "nama_mata_kuliah": "kecerdasan artifisial",
+      "jam": "15:30:00 - 18:30:00",
+      "lokasi": "REK-402"
+    }
+  ],
+  "jumat": [
+    {
+      "nama_mata_kuliah": "bahasa indonesia",
+      "jam": "09:30:00 - 11:30:00",
+      "lokasi": "REK-307"
+    }
+  ]
+}
