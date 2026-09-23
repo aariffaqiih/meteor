@@ -9,16 +9,6 @@ function normalizeMath(text) {
     // Convert \( ... \) to $ ... $
     text = text.replace(/\\\(([\s\S]*?)\\\)/g, (match, eq) => '$' + eq.trim() + '$');
 
-    // Convert standalone [ ... ] containing LaTeX commands to $$ ... $$
-    text = text.replace(/(^|\n)\s*\[\s*\n([\s\S]*?\\[a-zA-Z][\s\S]*?)\n\s*\]\s*($|\n)/g, (match, pre, eq, post) => {
-        return pre + '\n\n$$\n' + eq.trim() + '\n$$\n\n' + post;
-    });
-
-    // Convert ( \command ... ) containing LaTeX to $ \command ... $ when not preceded by $
-    text = text.replace(/(^|[^$])\(\s*(\\[a-zA-Z][^$\n]*?)\s*\)(?=[^$]|$)/g, (match, pre, eq) => {
-        return pre + '$' + eq.trim() + '$';
-    });
-
     return text;
 }
 
