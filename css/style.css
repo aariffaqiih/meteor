@@ -237,7 +237,7 @@
         }
         .landing-tagline {
             color: var(--muted);
-            font-size: 1.25rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.8rem);
             margin-bottom: 24px;
             text-align: center;
         }
