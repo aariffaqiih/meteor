@@ -23,3 +23,4 @@ README.md
 # Local backend templates & dependencies (kept locally only)
 templates/
 requirements.txt
+css/app-style.css
