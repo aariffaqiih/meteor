@@ -7,8 +7,8 @@
             --user-bubble-border: #222222;
             
             
-            --send-inactive: rgba(255, 255, 255, 0.05);
-            --send-inactive-icon: #555555;
+            --send-inactive: #414141;
+            --send-inactive-icon: #000;
             --send-active: #011D4B;
             --send-active-icon: #FFFFFF;
             --max-width: 1080px;
@@ -79,14 +79,14 @@
         }
         .landing-banner {
             max-width: var(--max-width);
-            width: 100%;
+
             margin-top: 0; /* mepet pojok atas */
             margin-bottom: 32px;
             animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         .landing-banner img {
             display: block;
-            width: 100%;
+            width: 768px;
             height: auto;
         }
 
@@ -195,7 +195,7 @@
         /* ============ INPUT BAR (shared) ============ */
         .input-bar {
             max-width: var(--max-width);
-            width: 100%;
+            width: 768px;
             margin: 0 auto;
             position: relative;
         }
@@ -203,9 +203,9 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 10px 10px 32px;
+            padding: 8px 8px 8px 24px;
             background: #000000;
-            border: 1px solid #212121 !important;
+            border: 0.105vw solid #414141 !important;
             border-radius: 40px; /* rounded pill */
 
             transition: border-color 0.3s ease;
@@ -232,8 +232,8 @@
         .input-wrap textarea:focus-visible { outline: none; }
         .send-btn {
             flex-shrink: 0;
-            width: 44px;
-            height: 44px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: var(--send-inactive);
             color: var(--send-inactive-icon);
