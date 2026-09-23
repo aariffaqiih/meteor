@@ -88,6 +88,15 @@ IDENTITY_REPLY = "Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tid
 # Legacy keyword blocklists removed to fix Scunthorpe problem.
 
 
+# Load knowledge base
+schedule_data = ""
+try:
+    if os.path.exists("knowledge/jadwal_kuliah.json"):
+        with open("knowledge/jadwal_kuliah.json", "r", encoding="utf-8") as f:
+            schedule_data = f.read()
+except Exception:
+    pass
+
 def protect_identity(answer):
     # The strict keyword blocklist has been removed to allow legitimate comparisons.
     # Identity protection is now handled contextually by the SYSTEM_MESSAGE prompt.
@@ -184,6 +193,8 @@ def call_providers(messages, deadline, client_time=None):
         system_msg = dict(SYSTEM_MESSAGE)
         if client_time:
             system_msg["content"] += f"\n\nInformasi Real-Time Perangkat User:\nWaktu saat ini: {client_time}"
+        if schedule_data:
+            system_msg["content"] += f"\n\nJadwal Kuliah User:\n{schedule_data}"
 
         payload = {"model": model, "messages": [system_msg, *messages], "max_tokens": 3072}
         if account["provider"] == "openrouter":

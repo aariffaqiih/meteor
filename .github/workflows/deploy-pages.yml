@@ -27,11 +27,12 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Build static site
         run: |
-          mkdir -p _site/images _site/js _site/css
+          mkdir -p _site/images _site/js _site/css _site/knowledge
           cp index.html config.js .nojekyll _site/
           cp -R images/. _site/images/
           cp -R js/. _site/js/
           cp -R css/. _site/css/
+          cp -R knowledge/. _site/knowledge/
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

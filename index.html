@@ -67,6 +67,12 @@
 <script src="js/math-extension.js"></script>
 <script src="config.js"></script>
 <script>
+let knowledgeJadwalKuliah = "";
+fetch("knowledge/jadwal_kuliah.json")
+    .then(res => res.text())
+    .then(text => knowledgeJadwalKuliah = text)
+    .catch(err => console.warn("Could not load jadwal_kuliah.json"));
+
 // ============================================================
 //  MARKED.JS CONFIGURATION
 // ============================================================
@@ -257,9 +263,14 @@ async function callAPI(messages) {
         if (!provider) continue;
 
 
+        let systemContent = SYSTEM_MESSAGE.content + "\n\nInformasi Real-Time Perangkat User:\nWaktu saat ini: " + new Date().toLocaleString("id-ID", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZoneName: "short" });
+        if (knowledgeJadwalKuliah) {
+            systemContent += "\n\nJadwal Kuliah User:\n" + knowledgeJadwalKuliah;
+        }
+
         const systemMessageWithTime = {
             role: "system",
-            content: SYSTEM_MESSAGE.content + "\n\nInformasi Real-Time Perangkat User:\nWaktu saat ini: " + new Date().toLocaleString("id-ID", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZoneName: "short" })
+            content: systemContent
         };
 
         const payload = {
