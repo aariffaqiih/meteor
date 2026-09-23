@@ -256,10 +256,17 @@ async function callAPI(messages) {
         const provider = PROVIDERS[entry.provider];
         if (!provider) continue;
 
+
+        const systemMessageWithTime = {
+            role: "system",
+            content: SYSTEM_MESSAGE.content + "\n\nInformasi Real-Time Perangkat User:\nWaktu saat ini: " + new Date().toLocaleString("id-ID", { timeZoneName: "short" })
+        };
+
         const payload = {
             model: provider.model,
-            messages: [SYSTEM_MESSAGE, ...messages],
+            messages: [systemMessageWithTime, ...messages],
             stream: true,
+
         };
 
         if (entry.provider === "openrouter") {

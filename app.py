@@ -138,7 +138,7 @@ def retry_delay(headers, status):
     return min(86400, max(1, delay)) if math.isfinite(delay) else fallback
 
 
-def ask_ai(messages):
+def ask_ai(messages, client_time=None):
     if not chat_lock.acquire(blocking=False):
         raise ChatError("Meteor sedang menjawab pesan lain. Coba lagi sebentar.", retry_after=1)
     try:
@@ -149,7 +149,7 @@ def ask_ai(messages):
             raise ChatError("Batas 20 pesan per menit tercapai. Coba lagi sebentar.", 429,
                             max(1, math.ceil(60 - (now - recent_requests[0]))))
         recent_requests.append(now)
-        return call_providers(messages, now + REQUEST_BUDGET)
+        return call_providers(messages, now + REQUEST_BUDGET, client_time)
     finally:
         chat_lock.release()
 
@@ -165,7 +165,7 @@ def read_provider_json(response, deadline):
     return json.loads(body)
 
 
-def call_providers(messages, deadline):
+def call_providers(messages, deadline, client_time=None):
     global active_key
     if not api_keys:
         raise ChatError("Belum ada API key aktif. Periksa konfigurasi .env.")
@@ -181,7 +181,11 @@ def call_providers(messages, deadline):
             continue
 
         url, model = PROVIDERS[account["provider"]]
-        payload = {"model": model, "messages": [SYSTEM_MESSAGE, *messages], "max_tokens": 3072}
+        system_msg = dict(SYSTEM_MESSAGE)
+        if client_time:
+            system_msg["content"] += f"\n\nInformasi Real-Time Perangkat User:\nWaktu saat ini: {client_time}"
+
+        payload = {"model": model, "messages": [system_msg, *messages], "max_tokens": 3072}
         if account["provider"] == "openrouter":
             # Also cap provider prices at zero; never fall back to a paid model.
             payload["provider"] = {"max_price": {"prompt": 0, "completion": 0, "request": 0}}
@@ -323,7 +327,8 @@ def index():
                 context = history if edit_index is None else history[:edit_index]
                 context = trim_history(context, len(message))
                 pending = [*context, {"role": "user", "content": message}]
-                answer = ask_ai(pending)
+                client_time = request.form.get("client_time", "")
+                answer = ask_ai(pending, client_time)
                 history = trim_history([*pending, {"role": "assistant", "content": answer}])
                 message, edit_index = "", None
         except ValueError:
