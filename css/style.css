@@ -3,14 +3,14 @@
             --background: #000000;
             --text: #EDEDED;
             --muted: #A1A1AA;
-            --user-bubble: #111111;
+            --user-bubble: #011D4B;
             --user-bubble-border: #222222;
             
             
             --send-inactive: rgba(255, 255, 255, 0.05);
             --send-inactive-icon: #555555;
-            --send-active: #EDEDED;
-            --send-active-icon: #050505;
+            --send-active: #011D4B;
+            --send-active-icon: #FFFFFF;
             --max-width: 1080px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
