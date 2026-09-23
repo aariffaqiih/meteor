@@ -224,7 +224,6 @@
         .send-btn.active {
             background: var(--send-active);
             color: var(--send-active-icon);
-            box-shadow: 0 4px 16px rgba(237, 237, 237, 0.2);
         }
         .send-btn:active:not(:disabled) { transform: scale(0.92); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .send-btn svg {
