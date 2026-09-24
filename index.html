@@ -509,9 +509,23 @@ function renderChat() {
             const isUser = item.role === "user";
             if (isUser) {
                 html += `<div class="msg-user">`;
-                html += `<div class="msg-user-bubble">`;
-                html += formatContent(item.content, false);
-                html += `</div>`;
+                if (Array.isArray(item.content)) {
+                    const imgPart = item.content.find(p => p.type === "image_url");
+                    if (imgPart) {
+                        html += `<div class="chat-img-wrap"><img src="${imgPart.image_url.url}"></div>`;
+                    }
+                    const textPart = item.content.find(p => p.type === "text");
+                    const text = textPart ? textPart.text.trim() : "";
+                    if (text) {
+                        html += `<div class="msg-user-bubble">`;
+                        html += formatContent(text, false);
+                        html += `</div>`;
+                    }
+                } else {
+                    html += `<div class="msg-user-bubble">`;
+                    html += formatContent(item.content, false);
+                    html += `</div>`;
+                }
                 html += `<div class="msg-user-actions">`;
                 html += `<button class="action-btn" onclick="copyMessage(${i})" aria-label="Copy pesan" title="Copy pesan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>`;
                 html += `<button class="action-btn" onclick="startEdit(${i})" aria-label="Edit pesan" title="Edit pesan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>`;
