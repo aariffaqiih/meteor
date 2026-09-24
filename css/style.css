@@ -86,7 +86,8 @@
         }
         .landing-banner img {
             display: block;
-            width: 768px;
+            width: 100%;
+            max-width: 768px;
             height: auto;
         }
 
@@ -194,8 +195,8 @@
 
         /* ============ INPUT BAR (shared) ============ */
         .input-bar {
-            max-width: var(--max-width);
-            width: 768px;
+            width: 100%;
+            max-width: 768px;
             margin: 0 auto;
             position: relative;
         }
@@ -206,7 +207,7 @@
             gap: 12px;
             padding: 8px;
             background: #000000;
-            border: 0.105vw solid #414141 !important;
+            border: 1.5px solid #414141 !important;
             border-radius: 28px; /* rounded pill */
 
             transition: border-color 0.3s ease;
@@ -260,7 +261,7 @@
         }
         .landing-tagline {
             color: #FFF;
-            font-size: clamp(2.1rem, 2.5vw, 1.8rem);
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             margin-bottom: 24px;
             text-align: center;
         }
