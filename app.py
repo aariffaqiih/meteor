@@ -33,7 +33,7 @@ if configured_secret and len(configured_secret.encode("utf-8")) < 32:
     raise ValueError("METEOR_SECRET_KEY harus berupa rahasia acak minimal 32 byte.")
 app.config.update(
     SECRET_KEY=configured_secret or secrets.token_hex(32),
-    MAX_CONTENT_LENGTH=128 * 1024,
+    MAX_CONTENT_LENGTH=8 * 1024 * 1024,
     MAX_FORM_MEMORY_SIZE=128 * 1024,
     MAX_FORM_PARTS=12,
     TRUSTED_HOSTS=["localhost", "127.0.0.1", "[::1]"],
@@ -80,7 +80,7 @@ LOCAL_REQUEST_LIMIT = 20  # Per minute, shared by all tabs in this local process
 PROVIDERS = {
     # Pin a conversational model: the random free router also includes classifiers.
     "openrouter": ("https://openrouter.ai/api/v1/chat/completions", "google/gemma-4-31b-it:free"),
-    "groq": ("https://api.groq.com/openai/v1/chat/completions", "openai/gpt-oss-20b"),
+    "groq": ("https://api.groq.com/openai/v1/chat/completions", "qwen/qwen3.8-27b"),
 }
 IDENTITY_REPLY = "Aku Meteor, chatbot AI. Detail model di balik aplikasi ini tidak dibagikan."
 
@@ -336,8 +336,10 @@ def index():
                     raise ValueError(f"Isi pesan sepanjang 1–{MAX_MESSAGE} karakter.")
                 # Keep the original history until regeneration succeeds, so failure is retryable.
                 context = history if edit_index is None else history[:edit_index]
+                image_base64 = request.form.get("image_base64", "")
+                user_content = [{"type": "text", "text": message}, {"type": "image_url", "image_url": {"url": image_base64}}] if image_base64 else message
                 context = trim_history(context, len(message))
-                pending = [*context, {"role": "user", "content": message}]
+                pending = [*context, {"role": "user", "content": user_content}]
                 client_time = request.form.get("client_time", "")
                 answer = ask_ai(pending, client_time)
                 history = trim_history([*pending, {"role": "assistant", "content": answer}])

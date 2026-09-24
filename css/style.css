@@ -203,7 +203,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 8px 8px 8px 24px;
+            padding: 8px;
             background: #000000;
             border: 0.105vw solid #414141 !important;
             border-radius: 40px; /* rounded pill */
@@ -482,3 +482,59 @@
             background: rgba(255,255,255,0.08);
             border-radius: 4px;
         }
+\n
+.upload-btn {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    border-radius: 50%;
+}
+.upload-btn:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+.upload-btn svg { width: 22px; height: 22px; }
+
+#image-preview-container {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 20px;
+    background: var(--user-bubble);
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid var(--user-bubble-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+#image-preview {
+    max-height: 60px;
+    border-radius: 6px;
+}
+#remove-image-btn {
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+}
+.chat-img-wrap img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 12px;
+    margin-top: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+}

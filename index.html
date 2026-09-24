@@ -22,7 +22,16 @@
         <p class="landing-tagline">Simple. Free. No Login. Meteor</p>
         <div class="input-bar">
             <div class="input-wrap">
-                <textarea id="message-landing" rows="1" placeholder="Ask anything" aria-label="Ask anything" autofocus></textarea>
+                
+                  <input type="file" class="file-input" accept="image/*" style="display: none;">
+                  <button type="button" class="upload-btn" aria-label="Upload Image">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                  </button>
+                  <div class="image-preview-container" style="display: none;">
+                      <img class="image-preview" src="" alt="Preview">
+                      <button type="button" class="remove-image-btn" aria-label="Remove Image">?</button>
+                  </div>
+                  <textarea id="message-landing" rows="1" placeholder="Ask anything" aria-label="Ask anything" autofocus></textarea>
                 <button class="send-btn" id="send-landing" onclick="handleSendFromLanding()" aria-label="Kirim">
                     <svg viewBox="0 0 22 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
                 </button>
@@ -50,7 +59,16 @@
             <p id="edit-notice" class="edit-notice" style="display:none">Menyimpan edit akan membuat jawaban baru dan menghapus pesan setelahnya.</p>
             <div class="input-bar">
                 <div class="input-wrap">
-                    <textarea id="message-chat" rows="1" placeholder="Ask anything" aria-label="Ask anything"></textarea>
+                    
+                  <input type="file" class="file-input" accept="image/*" style="display: none;">
+                  <button type="button" class="upload-btn" aria-label="Upload Image">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                  </button>
+                  <div class="image-preview-container" style="display: none;">
+                      <img class="image-preview" src="" alt="Preview">
+                      <button type="button" class="remove-image-btn" aria-label="Remove Image">?</button>
+                  </div>
+                  <textarea id="message-chat" rows="1" placeholder="Ask anything" aria-label="Ask anything"></textarea>
                     <button class="cancel-button" id="cancel-btn" style="display:none" onclick="cancelEdit()">Batal</button>
                     <button class="send-btn" id="send-chat" onclick="handleSend()" aria-label="Kirim">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
@@ -134,7 +152,7 @@ const PROVIDERS = {
     },
     groq: {
         url: "https://api.groq.com/openai/v1/chat/completions",
-        model: "openai/gpt-oss-20b",
+        model: "qwen/qwen3.8-27b",
     },
 };
 
@@ -198,6 +216,89 @@ function getActiveInput() {
 }
 function getActiveSendBtn() {
     return currentView === "landing" ? sendLanding : sendChat;
+}
+
+
+// ============================================================
+//  IMAGE UPLOAD LOGIC
+// ============================================================
+let currentImageBase64 = null;
+
+function setupImageUpload(wrap) {
+    const fileInput = wrap.querySelector('.file-input');
+    const uploadBtn = wrap.querySelector('.upload-btn');
+    const previewContainer = wrap.querySelector('.image-preview-container');
+    const previewImg = wrap.querySelector('.image-preview');
+    const removeBtn = wrap.querySelector('.remove-image-btn');
+
+    uploadBtn.addEventListener('click', () => fileInput.click());
+    
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+            processImage(e.target.files[0], previewContainer, previewImg);
+        }
+    });
+
+    removeBtn.addEventListener('click', () => {
+        currentImageBase64 = null;
+        previewContainer.style.display = 'none';
+        fileInput.value = '';
+    });
+}
+
+function processImage(file, previewContainer, previewImg) {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const MAX_SIZE = 1024;
+            let width = img.width;
+            let height = img.height;
+            if (width > height && width > MAX_SIZE) {
+                height *= MAX_SIZE / width;
+                width = MAX_SIZE;
+            } else if (height > MAX_SIZE) {
+                width *= MAX_SIZE / height;
+                height = MAX_SIZE;
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            currentImageBase64 = canvas.toDataURL('image/jpeg', 0.8);
+            if(previewImg && previewContainer) {
+                previewImg.src = currentImageBase64;
+                previewContainer.style.display = 'flex';
+            }
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+document.querySelectorAll('.input-wrap').forEach(setupImageUpload);
+
+window.addEventListener('paste', (e) => {
+    if (e.clipboardData && e.clipboardData.items) {
+        for (const item of e.clipboardData.items) {
+            if (item.type.indexOf('image') !== -1) {
+                const file = item.getAsFile();
+                const wrap = currentView === 'landing' ? landingEl.querySelector('.input-wrap') : chatViewEl.querySelector('.input-wrap');
+                const previewContainer = wrap.querySelector('.image-preview-container');
+                const previewImg = wrap.querySelector('.image-preview');
+                processImage(file, previewContainer, previewImg);
+                break;
+            }
+        }
+    }
+});
+
+function clearImagePreview() {
+    currentImageBase64 = null;
+    document.querySelectorAll('.image-preview-container').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.file-input').forEach(el => el.value = '');
 }
 
 // ============================================================
@@ -375,7 +476,16 @@ function escapeHTML(text) {
     return div.innerHTML;
 }
 
-function formatContent(text, isMarkdown = false) {
+function formatContent(contentObj, isMarkdown = false) {
+    if (Array.isArray(contentObj)) {
+        let out = "";
+        for (const part of contentObj) {
+            if (part.type === "text") out += escapeHTML(part.text).replace(/\n/g, "<br>");
+            else if (part.type === "image_url") out += <div class="chat-img-wrap"><img src=""></div>;
+        }
+        return out;
+    }
+    const text = String(contentObj);
     if (isMarkdown) {
         const normalized = typeof normalizeMath === "function" ? normalizeMath(text) : text;
         return marked.parse(normalized);
