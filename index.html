@@ -481,7 +481,7 @@ function formatContent(contentObj, isMarkdown = false) {
         let out = "";
         for (const part of contentObj) {
             if (part.type === "text") out += escapeHTML(part.text).replace(/\n/g, "<br>");
-            else if (part.type === "image_url") out += <div class="chat-img-wrap"><img src=""></div>;
+            else if (part.type === "image_url") out += `<div class="chat-img-wrap"><img src="${part.image_url.url}"></div>`;
         }
         return out;
     }
