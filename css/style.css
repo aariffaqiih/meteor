@@ -533,10 +533,15 @@
 .remove-image-btn:hover {
     background: #f0f0f0;
 }
+.chat-img-wrap {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: flex-end;
+}
 .chat-img-wrap img {
-    max-width: 100%;
+    max-width: min(100%, 450px);
     max-height: 300px;
-    border-radius: 12px;
-    margin-top: 10px;
+    border-radius: 20px;
     border: 1px solid rgba(255,255,255,0.1);
+    object-fit: contain;
 }
