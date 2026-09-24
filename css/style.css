@@ -237,22 +237,32 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: var(--send-inactive);
-            color: var(--send-inactive-icon);
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-            border: 1px solid transparent;
+            border: none;
+            padding: 0;
         }
-        .send-btn.active {
-            background: var(--send-active);
-            color: var(--send-active-icon);
+        .send-btn .send-bg {
+            fill: #414141;
+            transition: fill 0.25s;
+        }
+        .send-btn .send-arrow {
+            fill: black;
+            transition: fill 0.25s;
+        }
+        .send-btn.active .send-bg {
+            fill: #072D71;
+        }
+        .send-btn.active .send-arrow {
+            fill: white;
         }
         .send-btn:active:not(:disabled) { transform: scale(0.92); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .send-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 36px;
+            height: 36px;
         }
 
         /* Landing input positioning */
