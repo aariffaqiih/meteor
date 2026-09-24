@@ -498,38 +498,45 @@
 .upload-btn:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
 .upload-btn svg { width: 22px; height: 22px; }
 
-#image-preview-container {
+.image-preview-container {
     position: absolute;
-    bottom: calc(100% + 8px);
+    bottom: calc(100% + 12px);
     left: 20px;
-    background: var(--user-bubble);
-    padding: 6px;
+    padding: 0;
     border-radius: 12px;
-    border: 1px solid var(--user-bubble-border);
     display: flex;
     align-items: center;
-    gap: 8px;
     z-index: 10;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    background: transparent;
+    border: none;
 }
-#image-preview {
-    max-height: 60px;
-    border-radius: 6px;
+.image-preview {
+    max-height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid #333;
 }
-#remove-image-btn {
-    background: rgba(0,0,0,0.6);
-    color: white;
+.remove-image-btn {
+    background: white;
+    color: black;
     border: none;
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     display: grid;
     place-items: center;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: bold;
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: -6px;
+    right: -6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    line-height: 1;
+}
+.remove-image-btn:hover {
+    background: #f0f0f0;
 }
 .chat-img-wrap img {
     max-width: 100%;
