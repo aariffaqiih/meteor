@@ -201,12 +201,13 @@
         }
         .input-wrap {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 12px;
             padding: 8px;
             background: #000000;
             border: 0.105vw solid #414141 !important;
-            border-radius: 40px; /* rounded pill */
+            border-radius: 28px; /* rounded pill */
 
             transition: border-color 0.3s ease;
         }
@@ -499,23 +500,17 @@
 .upload-btn svg { width: 22px; height: 22px; }
 
 .image-preview-container {
-    position: absolute;
-    bottom: calc(100% + 12px);
-    left: 20px;
-    padding: 0;
-    border-radius: 12px;
+    position: relative;
+    width: 100%;
+    order: -1;
+    padding: 8px 12px 0px 12px;
     display: flex;
     align-items: center;
-    z-index: 10;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    background: transparent;
-    border: none;
 }
 .image-preview {
     max-height: 80px;
     border-radius: 12px;
     object-fit: cover;
-    border: 2px solid #333;
 }
 .remove-image-btn {
     background: white;
