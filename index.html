@@ -20,36 +20,38 @@
             <img src="images/new_banner.png" alt="Meteor 1.0" width="1960" height="720" fetchpriority="high">
         </div>
         <p class="landing-tagline">Simple. Free. No Login. Meteor</p>
-        <div class="input-bar">
-            <div class="input-wrap">
-                
+        <div class="input-bar-container">
+            <div class="input-bar" style="width: 100%;">
+                <div class="input-wrap">
+                    
                   <input type="file" class="file-input" accept="image/*" style="display: none;">
                   <button type="button" class="upload-btn" aria-label="Upload Image">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" width="2" height="16" fill="currentColor"/><rect y="9" width="2" height="16" transform="rotate(-90 0 9)" fill="currentColor"/></svg>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                   </button>
                   <div class="image-preview-container" style="display: none;">
-                        <div class="image-preview-wrapper" style="position: relative; display: inline-block; height: 80px;">
-                            <img class="image-preview" src="" alt="Preview" style="height: 100%; border-radius: 12px; object-fit: cover;">
+                        <div class="image-preview-wrapper">
+                            <img class="image-preview" src="" alt="Preview">
                             <button type="button" class="remove-image-btn" aria-label="Remove Image">&#x2715;</button>
                         </div>
                     </div>
                   <textarea id="message-landing" rows="1" placeholder="Ask anything" aria-label="Ask anything" autofocus></textarea>
-                <button class="send-btn" id="send-landing" onclick="handleSendFromLanding()" aria-label="Kirim">
-                    <svg class="send-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="send-bg" cx="18" cy="18" r="18" fill="#414141"/><path class="send-arrow" d="M17.2 24C17.2 24.4418 17.5582 24.8 18 24.8C18.4418 24.8 18.8 24.4418 18.8 24H18H17.2ZM18.5657 11.4343C18.2533 11.1219 17.7467 11.1219 17.4343 11.4343L12.3431 16.5255C12.0307 16.8379 12.0307 17.3444 12.3431 17.6569C12.6556 17.9693 13.1621 17.9693 13.4745 17.6569L18 13.1314L22.5255 17.6569C22.8379 17.9693 23.3444 17.9693 23.6569 17.6569C23.9693 17.3444 23.9693 16.8379 23.6569 16.5255L18.5657 11.4343ZM18 24H18.8L18.8 12H18H17.2L17.2 24H18Z" fill="black"/></svg>
-                </button>
+                    <button class="send-btn" id="send-landing" onclick="handleSendFromLanding()" aria-label="Kirim">
+                        <svg class="send-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3.478 2.405a1.153 1.153 0 00-1.082.203 1.107 1.107 0 00-.332 1.042l1.986 8.35h8.95c.312 0 .565.253.565.565a.565.565 0 01-.565.565h-8.95l-1.986 8.35c-.097.409.02.843.332 1.042.31.2.73.238 1.082.102l18.423-7.072a1.157 1.157 0 000-2.15l-18.423-7.072z"/></svg>
+                    </button>
+                </div>
+                <p class="disclaimer-text">Meteor adalah AI dan bisa membuat kesalahan. Harap periksa kembali responsnya.</p>
             </div>
-            <p class="disclaimer-text">Meteor adalah AI dan bisa membuat kesalahan. Harap periksa kembali responsnya.</p>
-        </div>
-        <div id="no-keys-notice" class="config-notice" style="display:none">
-            ⚠️ Belum ada API key. Buka file <code>config.js</code>, lalu isi
-            <code>CONFIG_API_KEYS</code>.
+            <div id="no-keys-notice" class="config-notice" style="display:none">
+                ⚠️ Belum ada API key. Buka file <code>config.js</code>, lalu isi
+                <code>CONFIG_API_KEYS</code>.
+            </div>
         </div>
     </div>
 
     <!-- ============ CHAT VIEW ============ -->
     <div id="chat-view" class="chat-view">
         <div class="chat-header">
-            <img src="images/header.png" alt="Meteor 1.0" width="1960" height="140">
+            <img src="images/header.png" alt="Meteor 1.0" width="140" height="32">
         </div>
         <div class="chat-messages" id="chat-messages">
             <div class="chat-messages-inner" id="conversation">
@@ -57,28 +59,30 @@
             </div>
         </div>
         <div class="chat-input-area">
-            <p id="error-box" class="error" role="alert" style="display:none"></p>
-            <p id="edit-notice" class="edit-notice" style="display:none">Menyimpan edit akan membuat jawaban baru dan menghapus pesan setelahnya.</p>
-            <div class="input-bar">
-                <div class="input-wrap">
-                    
-                  <input type="file" class="file-input" accept="image/*" style="display: none;">
-                  <button type="button" class="upload-btn" aria-label="Upload Image">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" width="2" height="16" fill="currentColor"/><rect y="9" width="2" height="16" transform="rotate(-90 0 9)" fill="currentColor"/></svg>
-                  </button>
-                  <div class="image-preview-container" style="display: none;">
-                        <div class="image-preview-wrapper" style="position: relative; display: inline-block; height: 80px;">
-                            <img class="image-preview" src="" alt="Preview" style="height: 100%; border-radius: 12px; object-fit: cover;">
-                            <button type="button" class="remove-image-btn" aria-label="Remove Image">&#x2715;</button>
+            <div class="input-bar-container">
+                <p id="error-box" class="error" role="alert" style="display:none"></p>
+                <p id="edit-notice" class="edit-notice" style="display:none">Menyimpan edit akan membuat jawaban baru dan menghapus pesan setelahnya.</p>
+                <div class="input-bar">
+                    <div class="input-wrap">
+                        
+                      <input type="file" class="file-input" accept="image/*" style="display: none;">
+                      <button type="button" class="upload-btn" aria-label="Upload Image">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                      </button>
+                      <div class="image-preview-container" style="display: none;">
+                            <div class="image-preview-wrapper">
+                                <img class="image-preview" src="" alt="Preview">
+                                <button type="button" class="remove-image-btn" aria-label="Remove Image">&#x2715;</button>
+                            </div>
                         </div>
+                      <textarea id="message-chat" rows="1" placeholder="Ask anything" aria-label="Ask anything"></textarea>
+                        <button class="cancel-button" id="cancel-btn" style="display:none" onclick="cancelEdit()">Batal</button>
+                        <button class="send-btn" id="send-chat" onclick="handleSend()" aria-label="Kirim">
+                            <svg class="send-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3.478 2.405a1.153 1.153 0 00-1.082.203 1.107 1.107 0 00-.332 1.042l1.986 8.35h8.95c.312 0 .565.253.565.565a.565.565 0 01-.565.565h-8.95l-1.986 8.35c-.097.409.02.843.332 1.042.31.2.73.238 1.082.102l18.423-7.072a1.157 1.157 0 000-2.15l-18.423-7.072z"/></svg>
+                        </button>
                     </div>
-                  <textarea id="message-chat" rows="1" placeholder="Ask anything" aria-label="Ask anything"></textarea>
-                    <button class="cancel-button" id="cancel-btn" style="display:none" onclick="cancelEdit()">Batal</button>
-                    <button class="send-btn" id="send-chat" onclick="handleSend()" aria-label="Kirim">
-                        <svg class="send-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="send-bg" cx="18" cy="18" r="18" fill="#414141"/><path class="send-arrow" d="M17.2 24C17.2 24.4418 17.5582 24.8 18 24.8C18.4418 24.8 18.8 24.4418 18.8 24H18H17.2ZM18.5657 11.4343C18.2533 11.1219 17.7467 11.1219 17.4343 11.4343L12.3431 16.5255C12.0307 16.8379 12.0307 17.3444 12.3431 17.6569C12.6556 17.9693 13.1621 17.9693 13.4745 17.6569L18 13.1314L22.5255 17.6569C22.8379 17.9693 23.3444 17.9693 23.6569 17.6569C23.9693 17.3444 23.9693 16.8379 23.6569 16.5255L18.5657 11.4343ZM18 24H18.8L18.8 12H18H17.2L17.2 24H18Z" fill="black"/></svg>
-                    </button>
+                    <p class="disclaimer-text">Meteor adalah AI dan bisa membuat kesalahan. Harap periksa kembali responsnya.</p>
                 </div>
-                <p class="disclaimer-text">Meteor adalah AI dan bisa membuat kesalahan. Harap periksa kembali responsnya.</p>
             </div>
         </div>
     </div>
