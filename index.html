@@ -576,10 +576,12 @@ function scrollToBottom() {
 function handleSendFromLanding() {
     if (isLoading) return;
     const text = msgLanding.value.trim();
-    if (!text) return;
+    if (!text && !currentImageBase64) return;
+    
     // Transfer text to chat input
     msgChat.value = "";
     msgLanding.value = "";
+    
     // Switch to chat view and send
     sendMessage(text);
 }
@@ -587,7 +589,8 @@ function handleSendFromLanding() {
 async function handleSend() {
     if (isLoading) return;
     const text = msgChat.value.trim();
-    if (!text) return;
+    if (!text && !currentImageBase64) return;
+    
     msgChat.value = "";
     updateSendButton(msgChat, sendChat);
     autoResize(msgChat);
@@ -612,7 +615,18 @@ async function sendMessage(text) {
     }
 
     // Tambah pesan user
-    history.push({ role: "user", content: text });
+    let finalContent = text;
+    if (currentImageBase64) {
+        finalContent = [
+            { type: "text", text: text || " " },
+            { type: "image_url", image_url: { url: currentImageBase64 } }
+        ];
+    }
+    history.push({ role: "user", content: finalContent });
+    
+    // Clear image
+    clearImagePreview();
+
     // Batasi riwayat
     while (history.length > MAX_HISTORY) {
         history.splice(0, 2);

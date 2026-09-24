@@ -262,11 +262,14 @@ def read_history(raw):
     clean = []
     for index, message in enumerate(history):
         role = "user" if index % 2 == 0 else "assistant"
-        if (
-            not isinstance(message, dict)
-            or message.get("role") != role
-            or not valid_text(message.get("content"), MAX_MESSAGE if role == "user" else MAX_ANSWER)
-        ):
+        if not isinstance(message, dict) or message.get("role") != role:
+            raise ValueError("Riwayat percakapan tidak valid. Mulai percakapan baru.")
+        content = message.get("content")
+        if isinstance(content, list):
+            text_part = next((c.get("text", "") for c in content if c.get("type") == "text"), "")
+            if not valid_text(text_part or " ", MAX_MESSAGE):
+                raise ValueError("Riwayat teks gambar tidak valid.")
+        elif not valid_text(content, MAX_MESSAGE if role == "user" else MAX_ANSWER):
             raise ValueError("Riwayat percakapan tidak valid. Mulai percakapan baru.")
         content = protect_identity(message["content"]) if role == "assistant" else message["content"]
         clean.append({"role": role, "content": content})
@@ -332,12 +335,11 @@ def index():
             else:
                 if request.form.get("edit_index", ""):
                     edit_index = read_edit_index(request.form["edit_index"], history)
-                if not valid_text(message, MAX_MESSAGE):
-                    raise ValueError(f"Isi pesan sepanjang 1–{MAX_MESSAGE} karakter.")
-                # Keep the original history until regeneration succeeds, so failure is retryable.
-                context = history if edit_index is None else history[:edit_index]
                 image_base64 = request.form.get("image_base64", "")
-                user_content = [{"type": "text", "text": message}, {"type": "image_url", "image_url": {"url": image_base64}}] if image_base64 else message
+                if not image_base64 and not valid_text(message, MAX_MESSAGE):
+                    raise ValueError(f"Isi pesan sepanjang 1-MAX karakter.")
+                context = history if edit_index is None else history[:edit_index]
+                user_content = [{"type": "text", "text": message or " "}, {"type": "image_url", "image_url": {"url": image_base64}}] if image_base64 else message
                 context = trim_history(context, len(message))
                 pending = [*context, {"role": "user", "content": user_content}]
                 client_time = request.form.get("client_time", "")
